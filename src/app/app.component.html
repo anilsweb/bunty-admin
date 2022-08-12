@@ -1,0 +1,18 @@
+<div class="layout-wrapper layout-2">
+  <div class="layout-inner">
+
+    <!-- Sidenav -->
+    <app-sidenav *ngIf="!router.url.includes('login')"></app-sidenav>
+
+    <div class="layout-container">
+      <app-header *ngIf="!router.url.includes('login')"></app-header>
+      <div class="layout-content">
+        <div class="container-fluid flex-grow-1 container-p-y">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
