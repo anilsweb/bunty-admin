@@ -8,6 +8,7 @@ import { HeaderComponent } from './@common/header/header.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { SubCategoryComponent } from './pages/sub-category/sub-category.component';
 import { WallpaperComponent } from './pages/wallpaper/wallpaper.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { WallpaperComponent } from './pages/wallpaper/wallpaper.component';
     HeaderComponent,
     CategoryComponent,
     SubCategoryComponent,
-    WallpaperComponent
+    WallpaperComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
