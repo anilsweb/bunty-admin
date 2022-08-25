@@ -22,21 +22,19 @@
         <!-- Divider -->
         <hr class="d-lg-none w-100 my-2">
 
-        <div class="navbar-nav align-items-lg-center">
-            <!-- Search -->
+        <!-- <div class="navbar-nav align-items-lg-center">
             <label class="nav-item navbar-text navbar-search-box p-0 active">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span class="navbar-search-input pl-2">
                     <input type="text" class="form-control navbar-text mx-2" placeholder="Ctrl + K">
                 </span>
             </label>
-        </div>
+        </div> -->
 
         <div class="navbar-nav align-items-lg-center ml-auto">
             <div class="demo-navbar-notifications nav-item dropdown mr-lg-3">
                 <a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown">
                     <i class="feather icon-bell navbar-icon align-middle"></i>
-                    <i class="fa-regular fa-bell"></i>
                     <span class="d-lg-none align-middle">&nbsp; Notifications</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
@@ -100,69 +98,6 @@
                 </div>
             </div>
 
-            <div class="demo-navbar-messages nav-item dropdown mr-lg-3">
-                <a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown">
-                    <i class="fa-regular fa-envelope"></i>
-                    <span class="badge badge-success badge-dot indicator"></span>
-                    <span class="d-lg-none align-middle">&nbsp; Messages</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <div class="bg-dark text-center text-white font-weight-bold p-3">
-                        4 New Messages
-                    </div>
-                    <div class="list-group list-group-flush">
-                        <a href="javascript:"
-                            class="list-group-item list-group-item-action media d-flex align-items-center">
-                            <img src="assets/img/avatars/6.png" class="d-block ui-w-40 rounded-circle" alt>
-                            <div class="media-body ml-3">
-                                <div class="text-dark line-height-condenced">Lorem ipsum dolor consectetuer elit.</div>
-                                <div class="text-muted small mt-1">
-                                    Josephin Doe &nbsp;·&nbsp; 58m ago
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="javascript:"
-                            class="list-group-item list-group-item-action media d-flex align-items-center">
-                            <img src="assets/img/avatars/4.png" class="d-block ui-w-40 rounded-circle" alt>
-                            <div class="media-body ml-3">
-                                <div class="text-dark line-height-condenced">Lorem ipsum dolor sit amet, consectetuer.
-                                </div>
-                                <div class="text-muted small mt-1">
-                                    Lary Doe &nbsp;·&nbsp; 1h ago
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="javascript:"
-                            class="list-group-item list-group-item-action media d-flex align-items-center">
-                            <img src="assets/img/avatars/5.png" class="d-block ui-w-40 rounded-circle" alt>
-                            <div class="media-body ml-3">
-                                <div class="text-dark line-height-condenced">Lorem ipsum dolor sit amet elit.</div>
-                                <div class="text-muted small mt-1">
-                                    Alice &nbsp;·&nbsp; 2h ago
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="javascript:"
-                            class="list-group-item list-group-item-action media d-flex align-items-center">
-                            <img src="assets/img/avatars/11.png" class="d-block ui-w-40 rounded-circle" alt>
-                            <div class="media-body ml-3">
-                                <div class="text-dark line-height-condenced">Lorem ipsum dolor sit amet consectetuer
-                                    amet elit
-                                    dolor sit.</div>
-                                <div class="text-muted small mt-1">
-                                    Suzen &nbsp;·&nbsp; 5h ago
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <a href="javascript:" class="d-block text-center text-muted small p-2 my-1">Show all messages</a>
-                </div>
-            </div>
-
             <!-- Divider -->
             <div class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">|
             </div>
@@ -170,18 +105,14 @@
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                     <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
                         <img src="/assets/images/1.png" alt class="d-block ui-w-30 rounded-circle">
-                        <span class="px-1 mr-lg-2 ml-2 ml-lg-0">Cindy Deitch</span>
+                        <span class="px-1 mr-lg-2 ml-2 ml-lg-0">Diksha</span>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a routerLink="/my-profile" class="dropdown-item">
-                        <i class="feather icon-user text-muted"></i> &nbsp; My profile</a>
-                    <a href="javascript:" class="dropdown-item">
-                        <i class="feather icon-mail text-muted"></i> &nbsp; Messages</a>
-                    <a href="javascript:" class="dropdown-item">
-                        <i class="feather icon-settings text-muted"></i> &nbsp; Account settings</a>
+                    <a routerLink="./my-profile" class="dropdown-item">
+                        <i class="feather icon-user text-muted"></i> &nbsp; Account Setting</a>
                     <div class="dropdown-divider"></div>
-                    <a href="javascript:" class="dropdown-item">
+                    <a  routerLink="./login" class="dropdown-item">
                         <i class="feather icon-power text-danger"></i> &nbsp; Log Out</a>
                 </div>
             </div>

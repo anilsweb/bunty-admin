@@ -1,0 +1,43 @@
+<div class="page-title d-flex align-items-center justify-content-between mb-4">
+    <h4 class="mb-0">User Reports</h4>
+
+            <!-- <div class="d-flex">
+                <div class="form-row">
+                    <div class="form-group" style="width: 200px;margin-left: 10px;     margin-top: 28px;">
+                        <input type="text" class="form-control" placeholder="Search Here">
+                    </div>
+                </div>
+        
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-default" style="height: 37px;
+                margin-top: 28px;
+                margin-left: 15px;"><i
+                    class="fa-solid fa-plus"></i> Add</button>
+            </div> -->
+</div>
+<div class="card table-responsive">
+    <table class="table table-bordered mb-0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Wallpaper</th>
+                <th>Report</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let list of [0,1,2,3,4]; let i = index">
+                <td>{{i + 1}}</td>
+                <td>Category 1</td>
+                <td>sanjay@ntekbb.com	</td>
+                <td><a href="#">NA.jpg</a></td>
+                <td><a href="#">Get Report</a></td>
+                <td>
+                    <!-- <i class="fa-solid fa-pencil mr-2" style="cursor: pointer;"></i> -->
+                    <i class="fa-solid fa-trash-can" style="cursor: pointer;"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
