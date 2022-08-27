@@ -14,6 +14,13 @@ import { UsersComponent } from './pages/users/users.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ApiUrlComponent } from './pages/api-url/api-url.component';
+import { AuthGuard } from './auth.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginModule } from './pages/login/login.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,9 +39,18 @@ import { ApiUrlComponent } from './pages/api-url/api-url.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LoginModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    NgxSpinnerModule,
+    HttpClientModule
   ],
-  providers: [],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

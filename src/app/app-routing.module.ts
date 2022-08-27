@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 import { ApiUrlComponent } from './pages/api-url/api-url.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -11,17 +12,17 @@ import { UsersComponent } from './pages/users/users.component';
 import { WallpaperComponent } from './pages/wallpaper/wallpaper.component';
 const routes: Routes = [
   {
-    path: '', component: HomeComponent
+    path: '', component: HomeComponent,canActivate: [AuthGuard] 
   },
   { path: 'login', loadChildren: () => import("./pages/login/login.module").then(m => m.LoginModule) },
-  { path: 'category', component: CategoryComponent},
-  { path: 'sub-category', component: SubCategoryComponent },
-  { path: 'my-profile', component: MyProfileComponent},
-  { path: 'wallpaper', component: WallpaperComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'reports', component: ReportsComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'api-url', component: ApiUrlComponent },
+  { path: 'category', component: CategoryComponent,canActivate: [AuthGuard] },
+  { path: 'sub-category', component: SubCategoryComponent,canActivate: [AuthGuard] },
+  { path: 'my-profile', component: MyProfileComponent,canActivate: [AuthGuard] },
+  { path: 'wallpaper', component: WallpaperComponent,canActivate: [AuthGuard] },
+  { path: 'users', component: UsersComponent,canActivate: [AuthGuard] },
+  { path: 'reports', component: ReportsComponent,canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent,canActivate: [AuthGuard] },
+  { path: 'api-url', component: ApiUrlComponent,canActivate: [AuthGuard] },
 ];
 
 @NgModule({
