@@ -11,10 +11,10 @@ import { CommonService } from 'src/app/common.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm:any = FormGroup;
+  loginForm: any = FormGroup;
   LoginResult: any;
   submitted = false;
-  
+
 
   constructor(
     private fb: FormBuilder,
@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
   ) {
     this.loginForm = this.fb.group({
       userName: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
       password: ['', Validators.required],
     });
   }
@@ -36,23 +35,24 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
   updateProfile() {
     this.submitted = true;
-    debugger
     if (this.loginForm.valid) {
-    this.spinner.show();
-    this.service.PostService(this.loginForm.value, 'Account/Login')
-      .subscribe((response: any) => {
-        this.spinner.hide();
-        console.log(response.body)
-        this.LoginResult = response.body;
-        if (!response.body.Error) {
-          this.snackBar.open('Login Successful', 'x', {
-            panelClass: ['success-snackbar'],
-            duration:  3000
-          });
-        }
-        this.router.navigate([''])
-      });
-  }
+      this.spinner.show();
+      this.service.PostService(this.loginForm.value, 'Account/Login')
+        .subscribe((response: any) => {
+          this.spinner.hide();
+          console.log(response)
+          this.LoginResult = response.body;
+          if (this.LoginResult?.status) {
+            localStorage.setItem('loginData', JSON.stringify(this.LoginResult.result));
+            this.router.navigate(['/']);
+          } else {
+            this.snackBar.open(this.LoginResult?.result?.status?.message, 'x', {
+              panelClass: ['success-snackbar'],
+              duration: 3000
+            });
+          }
+        });
+    }
   }
 
 }

@@ -21,6 +21,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './@common/material.module';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatSnackBarModule,
     MatButtonModule,
     NgxSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule
   ],
   exports: [
     FormsModule,

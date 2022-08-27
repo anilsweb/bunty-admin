@@ -23,11 +23,13 @@ export class CommonService {
   }
   getservice(saveData: any, currentUrl: any): Observable<any> {
     var currentToken: any;
-     currentToken = localStorage.getItem('token');
+    currentToken = JSON.parse(localStorage.getItem('loginData') || '{}');
+    console.log(currentToken);
+
     const httpHeaders = new HttpHeaders({
       // 'accept': 'application/json',
       // 'Content-Type': 'application/json',
-      'Authorization': currentToken
+      'Authorization': 'Bearer ' + currentToken.token
     });
 
     return this.http.get(this.baseUrl + currentUrl,
@@ -37,7 +39,7 @@ export class CommonService {
       }).pipe(
         catchError(err => {
           this.spinner.hide();
-          if (err['error'].error === "UNAUTHORIZED.") {
+          if (err['error']?.error === "UNAUTHORIZED.") {
             this.snackBar.open('Session Out', 'x', {
               panelClass: ['danger-snackbar'],
               duration: 3000
@@ -72,42 +74,42 @@ export class CommonService {
 
         catchError(err => {
           this.spinner.hide();
-          if(err.status == 400){
+          if (err.status == 400) {
             console.log(err.error.Error)
             this.snackBar.open(err.error.Error, 'x', {
               panelClass: ['danger-snackbar'],
-              duration:  3000
+              duration: 3000
             });
-          } else if(err.status == 500){
+          } else if (err.status == 500) {
             console.log(err.error.msg)
             this.snackBar.open(err.error.msg, 'x', {
               panelClass: ['danger-snackbar'],
-              duration:  3000
+              duration: 3000
             });
           }
-          else if(err.status == 406){
+          else if (err.status == 406) {
             console.log(err.error)
             this.snackBar.open(err.error, 'x', {
               panelClass: ['danger-snackbar'],
-              duration:  3000
+              duration: 3000
             });
           }
-          else{
-          this.snackBar.open(err?.error?.message, 'x', {
-            panelClass: ['danger-snackbar'],
-            duration: 3000
-          });
-        }
+          else {
+            this.snackBar.open(err?.error?.message, 'x', {
+              panelClass: ['danger-snackbar'],
+              duration: 3000
+            });
+          }
           return throwError(err);
         })
       )
   }
   PostService(saveData: any, currentUrl: any): Observable<any> {
     var currentToken: any;
-    currentToken = localStorage.getItem('token');
+    currentToken = JSON.parse(localStorage.getItem('loginData') || '{}');
     const httpHeaders = new HttpHeaders({
       // 'Content-Type': 'application/json',
-      'Authorization': currentToken
+      'Authorization': 'Bearer ' + currentToken.token
       // 'authorization': currentToken
     });
     console.log(currentToken);

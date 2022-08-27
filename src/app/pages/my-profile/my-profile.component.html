@@ -1,93 +1,38 @@
-<div class="page-title">
+<div class="page-title mb-4">
     <h4 class="">Account settings</h4>
 </div>
 
-<div class="card overflow-hidden">
-    <div class="row no-gutters row-bordered row-border-light">
-        <div class="col-md-3 pt-0">
-            <div class="list-group list-group-flush account-settings-links">
-                <a class="list-group-item list-group-item-action active" data-toggle="list"
-                    href="#account-general">My Profile</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list"
-                    href="#account-change-password">Change password</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Login
-                    History</a>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="account-general">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <form class="card-body" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+                <label class="form-label">Profile Image</label>
+                <div class="" style="width: 80px; margin-bottom: 1rem; position: relative;">
+                    <input id="fileInput" type='file' (change)="onSelectFile($event)"
+                        style="    position: absolute; z-index: 1;  height: 110px; width: 80px; top: -2px; opacity: 0;">
+                    <img [src]="model.profileImage" onError="this.src='assets/images/user.jpg'" alt=""
+                        style="object-fit: cover; height: 80px;  width: 80px; border-radius: 50%;">
+                    <span class="material-icons" style="position: absolute; bottom: 9px; right: 0;
+                background: #a856aa !important; border-radius: 50%;color: #fff;padding: 4px;font-size: 17px;">
+                        create
+                    </span>
+                </div>
 
-                    <div class="card-body media align-items-center">
-                        <img src="/assets/images/1.png" alt="" class="d-block ui-w-80">
-                        <div class="media-body ml-4">
-                            <label class="btn btn-outline-primary">
-                                Upload new photo
-                                <input type="file" class="account-settings-fileinput">
-                            </label> &nbsp;
-                            <button type="button" class="btn btn-default md-btn-flat">Reset</button>
-                            <div class=" small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                        </div>
+                <div class="d-flex w-100">
+                    <div class="form-group  w-100 mr-2">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
                     </div>
-                    <hr class="border-light m-0">
-
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label class="form-label">Username</label>
-                            <input type="text" class="form-control mb-1" value="nmaxwell">
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-control" value="Nelle Maxwell">
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">E-mail</label>
-                            <input type="text" class="form-control mb-1" value="nmaxwell@mail.com">
-                            <div class="alert alert-warning mt-3">
-                                Your email is not confirmed. Please check your inbox.
-                                <br>
-                                <a href="javascript:void(0)">Resend confirmation</a>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Company</label>
-                            <input type="text" class="form-control" value="Company Ltd.">
-                            <div class="clearfix"></div>
-                        </div>
+                    <div class="form-group w-100 mr-2">
+                        <label class="form-label">Email</label>
+                        <input type="text" class="form-control" readonly [(ngModel)]="model.email" name="email">
                     </div>
                 </div>
-                <div class="tab-pane fade" id="account-change-password">
-                    <div class="card-body pb-2">
-                        <div class="form-group">
-                            <label class="form-label">Current password</label>
-                            <input type="password" class="form-control">
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">New password</label>
-                            <input type="password" class="form-control">
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Repeat new password</label>
-                            <input type="password" class="form-control">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                <div class="text-right mt-3">
+                    <button type="button" class="btn btn-primary" type="submit">Save</button>
                 </div>
-                <div class="tab-pane fade" id="account-info">
-                    <div class="card-body pb-2">
-                        ...
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
-</div>
-
-<div class="text-right mt-3">
-    <button type="button" class="btn btn-default">Cancel</button>
-    <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
 </div>
