@@ -5,16 +5,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/@common/material.module';
+import { EmailConfirmComponent } from './email-confirm/email-confirm.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'email-confirm', component: EmailConfirmComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
 ]
 
 @NgModule({
   declarations: [
     LoginComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    EmailConfirmComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

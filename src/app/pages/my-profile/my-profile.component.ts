@@ -16,8 +16,7 @@ export class MyProfileComponent implements OnInit {
 
   constructor(
     private service: CommonService,
-    private spinner: NgxSpinnerService,
-    private snackBar: MatSnackBar,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +29,7 @@ export class MyProfileComponent implements OnInit {
       this.spinner.hide();
       console.log(res);
       this.model = res.body.result;
+      this.url = this.model.profileImage;
     })
   }
 
@@ -48,12 +48,12 @@ export class MyProfileComponent implements OnInit {
     const payload = new FormData();
     payload.append('type', 'profile');
     payload.append('fileName', files.name);
-    payload.append('fileData', this.selectedfiles, this.selectedfiles?.name);
+    payload.append('fileData', this.selectedfiles);
     this.spinner.show();
     this.service.PostService(payload, 'Master/UploadImage').subscribe(res => {
       this.spinner.hide();
       console.log(res);
-
+      this.model.profileImage = res.body.result;
     })
   }
 
@@ -61,10 +61,11 @@ export class MyProfileComponent implements OnInit {
     this.spinner.show();
     this.service.PostService(this.model, 'Account/ProfileUpdate').subscribe(res => {
       this.spinner.hide();
-      this.snackBar.open('this.LoginResult?.result?.status?.message', 'x', {
-        panelClass: ['success-snackbar'],
-        duration: 30000000
-      });
+      if (res.body.status) {
+        this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
+      } else {
+        this.service.snackbarOpen(res.body.result.message, 'x', 'danger-snackbar');
+      }
     })
   }
 

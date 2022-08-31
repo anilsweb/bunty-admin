@@ -10,7 +10,7 @@
                 <div class="" style="width: 80px; margin-bottom: 1rem; position: relative;">
                     <input id="fileInput" type='file' (change)="onSelectFile($event)"
                         style="    position: absolute; z-index: 1;  height: 110px; width: 80px; top: -2px; opacity: 0;">
-                    <img [src]="model.profileImage" onError="this.src='assets/images/user.jpg'" alt=""
+                    <img [src]="url" onError="this.src='assets/images/user.jpg'" alt=""
                         style="object-fit: cover; height: 80px;  width: 80px; border-radius: 50%;">
                     <span class="material-icons" style="position: absolute; bottom: 9px; right: 0;
                 background: #a856aa !important; border-radius: 50%;color: #fff;padding: 4px;font-size: 17px;">

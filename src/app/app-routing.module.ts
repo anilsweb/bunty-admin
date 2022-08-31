@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { ApiUrlComponent } from './pages/api-url/api-url.component';
 import { CategoryComponent } from './pages/category/category.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { ReportsComponent } from './pages/reports/reports.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'category', component: CategoryComponent,canActivate: [AuthGuard] },
   { path: 'sub-category', component: SubCategoryComponent,canActivate: [AuthGuard] },
   { path: 'my-profile', component: MyProfileComponent,canActivate: [AuthGuard] },
+  { path: 'change-password', component: ChangePasswordComponent,canActivate: [AuthGuard] },
   { path: 'wallpaper', component: WallpaperComponent,canActivate: [AuthGuard] },
   { path: 'users', component: UsersComponent,canActivate: [AuthGuard] },
   { path: 'reports', component: ReportsComponent,canActivate: [AuthGuard] },

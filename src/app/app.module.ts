@@ -23,6 +23,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './@common/material.module';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { ModalComponent } from './@common/modal/modal.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { MaterialModule } from './@common/material.module';
     UsersComponent,
     ReportsComponent,
     SettingsComponent,
-    ApiUrlComponent
+    ApiUrlComponent,
+    ChangePasswordComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,9 @@ import { MaterialModule } from './@common/material.module';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule
   ],
   exports: [
     FormsModule,

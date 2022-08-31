@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 mat-dialog-title class="mb-0">{{modalTitle}}</h2>
+    <button type="button" class="close" mat-dialog-close>×</button>
+</div>
+<form *ngIf="modalAction == 'addCategory'" (ngSubmit)="f.form.valid && onSubmitCategory()" #f="ngForm">
+    <mat-dialog-content class="mat-typography">
+        <div class="form-row">
+            <div class="form-group col">
+                <label class="form-label">Category Name</label>
+                <input type="text" class="form-control" name="name" [(ngModel)]="modelCategory.name" #name="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label class="form-label">Select Image <small class="text-muted">(Recommended resolution: 200x200,
+                        400x400)</small></label>
+                <label class="custom-file" [ngClass]="{ 'is-invalid': f.submitted && !url }">
+                    <input type="file" class="custom-file-input"
+                        (change)="onSelectFile($event, 'Category', modelCategory)">
+                    <span class="custom-file-label" style="padding-left: 15px;"></span>
+                </label>
+                <div *ngIf="url" class="mt-1">
+                    <img [src]="url" onError="this.src='assets/images/user.jpg'" alt=""
+                        style="object-fit: cover; height: 40px;  width: 100px;">
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="start" class="pt-0 pb-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </mat-dialog-actions>
+</form>
