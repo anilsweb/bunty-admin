@@ -8,7 +8,7 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary" (click)="add('addCategory', 'Add Category')" style="height: 37px;
+        <button type="button" class="btn btn-primary" (click)="add('addCategory', 'Add Category', {})" style="height: 37px;
                 margin-top: 28px;
                 margin-left: 15px;"><i class="fa-solid fa-plus"></i> Add</button>
     </div>
@@ -19,31 +19,30 @@
             <tr>
                 <th>#</th>
                 <th>Category Name</th>
+                <th>Image</th>
                 <th>Active / Deactive</th>
                 <th>Updated On</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let list of [0,1,2,3,4]; let i = index">
+            <tr *ngFor="let list of catList; let i = index">
                 <td>{{i + 1}}</td>
-                <td>Category 1</td>
+                <td>{{list?.name}}</td>
                 <td>
-                    <label class="switcher">
-                        <input type="checkbox" class="switcher-input">
-                        <span class="switcher-indicator">
-                            <span class="switcher-yes"></span>
-                            <span class="switcher-no"></span>
-                        </span>
-                    </label>
+                    <img [src]="list?.imageURL" onerror="this.src='/assets/images/dummy.png'" class="tdimg" alt="">
                 </td>
-                <td>11 Aug, 2022</td>
+                <td>
+                    <mat-slide-toggle [(ngModel)]="list.isActive" name="isActive_{{i}}"
+                        (change)="toggle($event, list?.id)"></mat-slide-toggle>
+                </td>
+                <td>{{list?.lastUpdate | date}}</td>
                 <td>
                     <div class="d-flex">
-                        <span class="btn-action" matTooltip="Edit">
+                        <span class="btn-action" matTooltip="Edit" (click)="add('editCategory', 'Edit Category', list)">
                             <i class="fa-solid fa-pencil"></i>
                         </span>
-                        <span class="btn-action" matTooltip="Delete">
+                        <span class="btn-action" matTooltip="Delete" (click)="delete('delete', 'Delete', list.id)">
                             <i class="fa-solid fa-trash-can"></i>
                         </span>
                     </div>

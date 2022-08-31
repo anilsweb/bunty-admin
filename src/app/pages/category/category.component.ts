@@ -11,6 +11,13 @@ import { CommonService } from 'src/app/common.service';
 })
 export class CategoryComponent implements OnInit {
 
+  modal = {
+    "pageIndex": 1,
+    "pageSize": 10,
+    "searchText": null
+  }
+  catList: any[] = [];
+
   constructor(
     public dialog: MatDialog,
     private service: CommonService,
@@ -23,21 +30,56 @@ export class CategoryComponent implements OnInit {
 
   list() {
     this.spinner.show();
-    this.service.PostService({}, 'App/CategoryList').subscribe(res => {
+    this.service.PostService(this.modal, 'Master/CategoryList').subscribe(res => {
       console.log(res);
-      
+      this.catList = res.body.result;
       this.spinner.hide();
     })
   }
 
-  add(action: any, name: any) {
+  add(action: any, name: any, obj: any) {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '500px',
+      data: { action: action, Title: name, obj: obj }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.list();
+      }
+    });
+  }
+  toggle(e: any, id: any) {
+    if (e) {
+      this.spinner.show();
+      this.service.PostService({ id: id }, 'Master/CategoryActiveDeactive').subscribe(res => {
+        this.spinner.hide();
+        if (res.body.result.isSuccess) {
+          this.list();
+          this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
+        } else {
+          this.service.snackbarOpen(res.body.result.message, 'x', 'danger-snackbar');
+        }
+      })
+    }
+  }
+  delete(action: any, name: any, id: any) {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '500px',
       data: { action: action, Title: name }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if (result) {
+        this.spinner.show();
+        this.service.PostService({ id: id }, 'Master/CategoryDelete').subscribe(res => {
+          this.spinner.hide();
+          if (res.body.result.isSuccess) {
+            this.list();
+            this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
+          } else {
+            this.service.snackbarOpen(res.body.result.message, 'x', 'danger-snackbar');
+          }
+        })
+      }
     });
   }
-
 }

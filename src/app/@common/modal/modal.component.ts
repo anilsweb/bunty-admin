@@ -31,13 +31,24 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.modalAction == 'editCategory') {
+      this.modelCategory = this.modalData.obj;
+      this.url = this.modelCategory.imageURL;
+    }
   }
 
-  onSubmitCategory() {
+  onSubmitCategory(type: any) {
     if (this.modelCategory.imageURL) {
       console.log(this.modelCategory);
       this.spinner.show();
-      this.service.PostService(this.modelCategory, 'Master/CategorySave').subscribe(res => {
+      console.log(type);
+      let apiName;
+      if (type == 'add') {
+        apiName = 'Master/CategorySave';
+      } else {
+        apiName = 'Master/CategoryUpdate';
+      }
+      this.service.PostService(this.modelCategory, apiName).subscribe(res => {
         this.spinner.hide();
         console.log(res);
         if (res.body.status) {
