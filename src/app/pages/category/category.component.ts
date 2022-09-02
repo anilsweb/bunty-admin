@@ -54,7 +54,6 @@ export class CategoryComponent implements OnInit {
       this.service.PostService({ id: id }, 'Master/CategoryActiveDeactive').subscribe(res => {
         this.spinner.hide();
         if (res.body.result.isSuccess) {
-          this.list();
           this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
         } else {
           this.service.snackbarOpen(res.body.result.message, 'x', 'danger-snackbar');

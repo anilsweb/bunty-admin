@@ -16,6 +16,8 @@ export class ModalComponent implements OnInit {
   modelCategory: any = {};
   url: any;
   selectedfiles: any;
+  modelSubCategory: any = {};
+  cateogyList: any[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {},
@@ -35,6 +37,21 @@ export class ModalComponent implements OnInit {
       this.modelCategory = this.modalData.obj;
       this.url = this.modelCategory.imageURL;
     }
+    if (this.modalAction == 'editSubCategory') {
+      this.modelSubCategory = this.modalData.obj;
+      this.url = this.modelSubCategory.imageURL;
+    }
+    if (this.modalAction == 'addSubCategory' || this.modalAction == 'editSubCategory') {
+      this.categoryDropDown();
+    }
+  }
+
+  categoryDropDown() {
+    this.spinner.show();
+    this.service.getservice({}, 'Master/CategoryDropdownList').subscribe(res => {
+      this.spinner.hide();
+      this.cateogyList = res.body.result;
+    });
   }
 
   onSubmitCategory(type: any) {
@@ -53,6 +70,30 @@ export class ModalComponent implements OnInit {
         console.log(res);
         if (res.body.status) {
           this.dialogRef.close(this.modelCategory);
+          this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
+        } else {
+          this.service.snackbarOpen(res.body.result.message, 'x', 'danger-snackbar');
+        }
+      })
+    }
+  }
+
+  onSubmitSubCategory(type: any) {
+    if (this.modelSubCategory.imageURL) {
+      console.log(this.modelSubCategory);
+      this.spinner.show();
+      console.log(type);
+      let apiName;
+      if (type == 'add') {
+        apiName = 'Master/SubcategorySave';
+      } else {
+        apiName = 'Master/SubcategoryUpdate';
+      }
+      this.service.PostService(this.modelSubCategory, apiName).subscribe(res => {
+        this.spinner.hide();
+        console.log(res);
+        if (res.body.status) {
+          this.dialogRef.close(this.modelSubCategory);
           this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
         } else {
           this.service.snackbarOpen(res.body.result.message, 'x', 'danger-snackbar');

@@ -1,8 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
 
-.btn-action{width: 25px; height: 25px; border: 1px solid #ccc; border-radius: 3px; display: flex; align-items: center; justify-content: center; margin-right: 6px; font-size: 12px; cursor: pointer;
-    i{position: relative; top: 1px;}
-} 
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.btn-action {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    font-size: 12px;
+    cursor: pointer;
+
+    i {
+        position: relative;
+        top: 1px;
+    }
+}
+
+.success-snackbar {
+    background: green;
+    color: #fff;
+}
+
+.danger-snackbar {
+    background: red;
+    color: #fff;
+}
+
+.mat-simple-snackbar-action button {
+    color: #fff;
+}

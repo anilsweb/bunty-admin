@@ -15,10 +15,9 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-default" style="height: 37px;
+        <button type="button" class="btn btn-primary" (click)="add('addSubCategory', 'Add Sub Category', {})" style="height: 37px;
         margin-top: 28px;
-        margin-left: 15px;"><i
-            class="fa-solid fa-plus"></i> Add</button>
+        margin-left: 15px;"><i class="fa-solid fa-plus"></i> Add</button>
     </div>
 </div>
 <div class="card table-responsive">
@@ -37,8 +36,8 @@
         <tbody>
             <tr *ngFor="let list of catList; let i = index">
                 <td>{{i + 1}}</td>
+                <td>{{list?.categoryName}}</td>
                 <td>{{list?.name}}</td>
-                <td></td>
                 <td>
                     <img [src]="list?.imageURL" onerror="this.src='/assets/images/dummy.png'" class="tdimg" alt="">
                 </td>
@@ -49,7 +48,8 @@
                 <td>{{list?.lastUpdate | date}}</td>
                 <td>
                     <div class="d-flex">
-                        <span class="btn-action" matTooltip="Edit" (click)="add('editCategory', 'Edit Category', list)">
+                        <span class="btn-action" matTooltip="Edit"
+                            (click)="add('editSubCategory', 'Edit Sub Category', list)">
                             <i class="fa-solid fa-pencil"></i>
                         </span>
                         <span class="btn-action" matTooltip="Delete" (click)="delete('delete', 'Delete', list.id)">
