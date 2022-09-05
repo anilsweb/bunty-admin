@@ -131,7 +131,7 @@ export class CommonService {
   snackbarOpen(msg: any, action: any, sclass: any) {
     this.snackBar.open(msg, action, {
       panelClass: [sclass],
-      duration: 3000000
+      duration: 3000
     });
   }
 }

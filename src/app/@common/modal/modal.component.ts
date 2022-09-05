@@ -18,6 +18,8 @@ export class ModalComponent implements OnInit {
   selectedfiles: any;
   modelSubCategory: any = {};
   cateogyList: any[] = [];
+  modelUser: any = {};
+  roleList: any[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {},
@@ -44,6 +46,17 @@ export class ModalComponent implements OnInit {
     if (this.modalAction == 'addSubCategory' || this.modalAction == 'editSubCategory') {
       this.categoryDropDown();
     }
+    if (this.modalAction == 'addUser') {
+      this.roleDropDown();
+    }
+  }
+
+  roleDropDown() {
+    this.spinner.show();
+    this.service.getservice({}, 'UserRoles/RolesDropDownList').subscribe(res => {
+      this.spinner.hide();
+      this.roleList = res.body.result;
+    });
   }
 
   categoryDropDown() {
@@ -124,6 +137,28 @@ export class ModalComponent implements OnInit {
       console.log(res);
       modal.imageURL = res.body.result;
       modal.imageName = files.name;
+    })
+  }
+
+  onSubmitUser(type: any) {
+    console.log(this.modelSubCategory);
+    this.spinner.show();
+    console.log(type);
+    let apiName;
+    if (type == 'add') {
+      apiName = 'UserManagement/UserSave';
+    } else {
+      apiName = 'Master/SubcategoryUpdate';
+    }
+    this.service.PostService(this.modelUser, apiName).subscribe(res => {
+      this.spinner.hide();
+      console.log(res);
+      if (res?.body?.status) {
+        this.dialogRef.close(this.modelUser);
+        this.service.snackbarOpen(res?.body?.result?.message, 'x', 'success-snackbar');
+      } else {
+        this.service.snackbarOpen(res?.body?.result?.message, 'x', 'danger-snackbar');
+      }
     })
   }
 
