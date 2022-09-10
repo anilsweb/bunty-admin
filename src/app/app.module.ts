@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './@common/material.module';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { ModalComponent } from './@common/modal/modal.component';
+import { LoginHistoryComponent } from './pages/login-history/login-history.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ModalComponent } from './@common/modal/modal.component';
     SettingsComponent,
     ApiUrlComponent,
     ChangePasswordComponent,
-    ModalComponent
+    ModalComponent,
+    LoginHistoryComponent
   ],
   imports: [
     BrowserModule,

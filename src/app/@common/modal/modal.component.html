@@ -74,11 +74,18 @@
 </form>
 
 <form *ngIf="modalAction == 'addUser' || modalAction == 'editUser'"
-    (ngSubmit)="f.form.valid && onSubmitUser(modalAction == 'addUser' ? 'add' : 'edit')" #f="ngForm">
+    (ngSubmit)="f.form.valid && onSubmitUser()" #f="ngForm">
     <mat-dialog-content class="mat-typography">
         <div class="form-row">
             <div class="form-group col">
                 <label class="form-label">Name</label>
+                <input type="text" class="form-control" [(ngModel)]="modelUser.name" name="name"
+                    #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label class="form-label">User Name</label>
                 <input type="text" class="form-control" [(ngModel)]="modelUser.userName" name="userName"
                     #userName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && userName.invalid }" required>
             </div>
@@ -87,7 +94,7 @@
             <div class="form-group col">
                 <label class="form-label">Email</label>
                 <input type="text" class="form-control" [(ngModel)]="modelUser.email" name="email" #email="ngModel"
-                    [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email>
+                    [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email [disabled]="modalAction == 'editUser'">
             </div>
         </div>
         <div class="form-row">
@@ -97,7 +104,7 @@
                     [ngClass]="{ 'is-invalid': f.submitted && phone.invalid }" required>
             </div>
         </div>
-        <div class="form-row">
+        <div class="form-row" *ngIf="modalAction != 'editUser'">
             <div class="form-group col">
                 <label class="form-label">Password</label>
                 <input type="password" class="form-control" [(ngModel)]="modelUser.password" name="password"
@@ -107,13 +114,10 @@
         <div class="form-row">
             <div class="form-group col">
                 <label class="form-label d-block">Select Role</label>
-                <mat-radio-group [(ngModel)]="modelUser.roleId" name="roleId"
-                #roleId="ngModel" [ngClass]="{ 'is-invalid': f.submitted && roleId.invalid }" required>
-                    <mat-radio-button class="d-block" [value]="list?.id" *ngFor="let list of roleList">{{list?.name}}</mat-radio-button>
-                </mat-radio-group>
-                <div *ngIf="f.submitted && roleId?.invalid" class="invalid-feedback">
-                    <div *ngIf="roleId?.errors?.['required']">Role is required</div>
-                </div>
+                <mat-select class="form-control" [(ngModel)]="modelUser.roleId" name="roleId" #roleId="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && roleId.invalid }" required>
+                    <mat-option *ngFor="let list of roleList" [value]="list?.id">{{list?.name}}</mat-option>
+                </mat-select>
             </div>
         </div>
     </mat-dialog-content>

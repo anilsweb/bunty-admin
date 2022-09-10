@@ -46,8 +46,11 @@ export class ModalComponent implements OnInit {
     if (this.modalAction == 'addSubCategory' || this.modalAction == 'editSubCategory') {
       this.categoryDropDown();
     }
-    if (this.modalAction == 'addUser') {
+    if (this.modalAction == 'addUser' || this.modalAction == 'editUser') {
       this.roleDropDown();
+    }
+    if (this.modalAction == 'editUser') {
+      this.modelUser = this.modalData.obj;
     }
   }
 
@@ -140,16 +143,10 @@ export class ModalComponent implements OnInit {
     })
   }
 
-  onSubmitUser(type: any) {
+  onSubmitUser() {
     console.log(this.modelSubCategory);
     this.spinner.show();
-    console.log(type);
-    let apiName;
-    if (type == 'add') {
-      apiName = 'UserManagement/UserSave';
-    } else {
-      apiName = 'Master/SubcategoryUpdate';
-    }
+    let apiName = 'UserManagement/UserSave';
     this.service.PostService(this.modelUser, apiName).subscribe(res => {
       this.spinner.hide();
       console.log(res);

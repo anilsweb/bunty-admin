@@ -1,0 +1,53 @@
+<div class="page-title d-flex align-items-center justify-content-between mb-4">
+    <h4 class="mb-0">Login History</h4>
+    <div class="d-flex">
+        <div class="form-row">
+            <div class="form-group" style="width: 200px;">
+                <label class="form-label">Select User Name</label>
+                <mat-select class="form-control" placeholder="Select" [(ngModel)]="modal.UserId" name="UserId" (selectionChange)="list()">
+                    <mat-option *ngFor="let list of userDropdownList" [value]="list?.id">{{list?.name}}</mat-option>
+                </mat-select>
+            </div>
+            <div class="form-group" style="width: 200px;margin-left: 10px;">
+                <label class="form-label">Select Login Status</label>
+                <mat-select class="form-control" placeholder="Select" [(ngModel)]="modal.LoginStatusCode" name="LoginStatusCode" (selectionChange)="list()">
+                    <mat-option *ngFor="let list of loginStatus" [value]="list?.id">{{list?.name}}</mat-option>
+                </mat-select>
+            </div>
+            <div class="form-group position-relative filter-datepic" style="width: 200px;margin-left: 10px;">
+                <label class="form-label">Login Date</label>
+                <input type="text" class="form-control" (click)="picker1.open()" [matDatepicker]="picker1" [(ngModel)]="modal.LoginTime" name="LoginTime" (dateChange)="list()">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card table-responsive">
+    <table class="table table-bordered mb-0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>User Name</th>
+                <th>IP Address</th>
+                <th>Login Status</th>
+                <th>Login Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let list of userList; let i = index">
+                <td>
+                    {{i + 1}}
+                </td>
+                <td>{{list?.userName}}</td>
+                <td>{{list?.ipAddress}}</td>
+                <td>
+                    {{list?.loginStatus}}
+                </td>
+                <td>
+                    {{list?.loginTime | date:'medium'}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

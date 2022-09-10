@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { CommonService } from './common.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +9,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'admin';
+  genData: any;
   constructor(
-    public router: Router
-  ) { }
+    public router: Router,
+    private titleService: Title,
+    private service: CommonService,
+  ) {
+    this.service.genralDetail.subscribe(res => {
+      this.genData = res;
+      this.titleService.setTitle(this.genData.title);
+    })
+  }
 }

@@ -17,6 +17,7 @@ export class SubCategoryComponent implements OnInit {
     "searchText": null
   }
   catList: any[] = [];
+  deleteIds: any[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -61,7 +62,17 @@ export class SubCategoryComponent implements OnInit {
       })
     }
   }
-  delete(action: any, name: any, id: any) {
+  noCheck(e: any, id: any) {
+    if (e.checked) {
+      this.deleteIds.push(id);
+    } else {
+      const index = this.deleteIds.findIndex(x => x == id);
+      this.deleteIds.splice(index, 1);
+    }
+    console.log(this.deleteIds);
+
+  }
+  delete(action: any, name: any, id: any, type: any) {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '500px',
       data: { action: action, Title: name }
@@ -69,7 +80,13 @@ export class SubCategoryComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.spinner.show();
-        this.service.PostService({ id: id }, 'Master/SubcategoryDelete').subscribe(res => {
+        let delData = [];
+        if (type == 'single') {
+          delData.push(id);
+        } else {
+          delData = id;
+        }
+        this.service.PostService(delData, 'Master/SubcategoryDeleteByRange').subscribe(res => {
           this.spinner.hide();
           if (res.body.result.isSuccess) {
             this.list();

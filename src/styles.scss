@@ -46,3 +46,15 @@ body {
     height: 50px;
     object-fit: cover;
 }
+.no-checkbox{position: relative;
+    top: -1px;
+    margin-right: 8px;
+.mat-checkbox-layout{margin-bottom: 0;}
+}
+.filter-datepic{
+    .mat-datepicker-toggle{
+        position: absolute;
+        bottom: -2px;
+        right: 0px;
+    }
+}

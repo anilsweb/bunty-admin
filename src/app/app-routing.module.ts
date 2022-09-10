@@ -5,6 +5,7 @@ import { ApiUrlComponent } from './pages/api-url/api-url.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginHistoryComponent } from './pages/login-history/login-history.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SettingsComponent } from './pages/settings/settings.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'reports', component: ReportsComponent,canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent,canActivate: [AuthGuard] },
   { path: 'api-url', component: ApiUrlComponent,canActivate: [AuthGuard] },
+  { path: 'log-history', component: LoginHistoryComponent,canActivate: [AuthGuard] },
 ];
 
 @NgModule({

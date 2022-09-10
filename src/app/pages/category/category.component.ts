@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalComponent } from 'src/app/@common/modal/modal.component';
 import { CommonService } from 'src/app/common.service';
@@ -10,13 +11,15 @@ import { CommonService } from 'src/app/common.service';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-
-  modal = {
-    "pageIndex": 1,
-    "pageSize": 10,
-    "searchText": null
-  }
   catList: any[] = [];
+  deleteIds: any[] = [];
+
+  TableIndex: number = 1;
+  pageIndex: number = 1;
+  pageSize: number = 10;
+  pageSizeOptions: number[] = [10, 20, 50];
+  length: number | undefined;
+  pageEvent: any = PageEvent;
 
   constructor(
     public dialog: MatDialog,
@@ -25,16 +28,30 @@ export class CategoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.list();
+    this.list(1, 10);
   }
 
-  list() {
+  list(start: any, length: any) {
     this.spinner.show();
-    this.service.PostService(this.modal, 'Master/CategoryList').subscribe(res => {
+    let InputData = {
+      "searchText": null,
+      "pageIndex": start,
+      "pageSize": length,
+    }
+    this.service.PostService(InputData, 'Master/CategoryList').subscribe(res => {
       console.log(res);
-      this.catList = res.body.result;
       this.spinner.hide();
+      this.catList = res.body.result;
+      this.length = res.body.totalCount;
     })
+  }
+  pageselect(event: any) {
+    console.log(event);
+    
+    let offset;
+    offset = event.pageIndex * event.pageSize;
+    this.TableIndex = event.pageIndex * event.pageSize;
+    this.list(offset, event.pageSize);
   }
 
   add(action: any, name: any, obj: any) {
@@ -44,7 +61,7 @@ export class CategoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.list();
+        this.list(1, 10);
       }
     });
   }
@@ -61,7 +78,17 @@ export class CategoryComponent implements OnInit {
       })
     }
   }
-  delete(action: any, name: any, id: any) {
+  noCheck(e: any, id: any) {
+    if (e.checked) {
+      this.deleteIds.push(id);
+    } else {
+      const index = this.deleteIds.findIndex(x => x == id);
+      this.deleteIds.splice(index, 1);
+    }
+    console.log(this.deleteIds);
+
+  }
+  delete(action: any, name: any, id: any, type: any) {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '500px',
       data: { action: action, Title: name }
@@ -69,10 +96,16 @@ export class CategoryComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.spinner.show();
-        this.service.PostService({ id: id }, 'Master/CategoryDelete').subscribe(res => {
+        let delData = [];
+        if (type == 'single') {
+          delData.push(id);
+        } else {
+          delData = id;
+        }
+        this.service.PostService(delData, 'Master/CategoryDeleteByRange').subscribe(res => {
           this.spinner.hide();
           if (res.body.result.isSuccess) {
-            this.list();
+            this.list(1, 10);
             this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
           } else {
             this.service.snackbarOpen(res.body.result.message, 'x', 'danger-snackbar');

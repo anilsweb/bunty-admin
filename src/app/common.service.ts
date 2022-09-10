@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -13,6 +13,7 @@ export class CommonService {
   baseUrl: any;
   ChatData = new Subject();
   headers: any = '';
+  genralDetail = new BehaviorSubject({});
   constructor(
     public http: HttpClient,
     private snackBar: MatSnackBar,

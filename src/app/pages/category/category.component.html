@@ -13,6 +13,11 @@
                 margin-left: 15px;"><i class="fa-solid fa-plus"></i> Add</button>
     </div>
 </div>
+<div class="text-right" *ngIf="deleteIds.length > 0">
+    <button type="button" class="btn btn-danger mb-2" (click)="delete('delete', 'Delete', deleteIds, 'multiple')"><i
+            class="fa-solid fa-trash"></i>
+        Delete</button>
+</div>
 <div class="card table-responsive">
     <table class="table table-bordered mb-0">
         <thead>
@@ -27,7 +32,9 @@
         </thead>
         <tbody>
             <tr *ngFor="let list of catList; let i = index">
-                <td>{{i + 1}}</td>
+                <td>
+                    <mat-checkbox class="no-checkbox" (change)="noCheck($event, list.id)"></mat-checkbox>{{i + 1}}
+                </td>
                 <td>{{list?.name}}</td>
                 <td>
                     <img [src]="list?.imageURL" onerror="this.src='/assets/images/dummy.png'" class="tdimg" alt="">
@@ -42,7 +49,8 @@
                         <span class="btn-action" matTooltip="Edit" (click)="add('editCategory', 'Edit Category', list)">
                             <i class="fa-solid fa-pencil"></i>
                         </span>
-                        <span class="btn-action" matTooltip="Delete" (click)="delete('delete', 'Delete', list.id)">
+                        <span class="btn-action" matTooltip="Delete"
+                            (click)="delete('delete', 'Delete', list.id, 'single')">
                             <i class="fa-solid fa-trash-can"></i>
                         </span>
                     </div>
@@ -50,4 +58,7 @@
             </tr>
         </tbody>
     </table>
+    <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent = pageselect($event)" [showFirstLastButtons]="true">
+    </mat-paginator>
 </div>

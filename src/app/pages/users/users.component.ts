@@ -16,8 +16,10 @@ export class UsersComponent implements OnInit {
     "pageSize": 10,
     "searchText": null
   }
-  catList: any[] = [];
-
+  userList: any[] = [];
+  deleteIds: any[] = [];
+  userData: any;
+  udata: any;
   constructor(
     public dialog: MatDialog,
     private service: CommonService,
@@ -26,13 +28,17 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.list();
+    this.udata = localStorage.getItem('loginData');
+    this.userData = JSON.parse(this.udata);
+    console.log(this.userData);
+
   }
 
   list() {
     this.spinner.show();
     this.service.PostService(this.modal, 'UserManagement/UserList').subscribe(res => {
       console.log(res);
-      this.catList = res.body.result;
+      this.userList = res.body.result;
       this.spinner.hide();
     })
   }
@@ -51,7 +57,7 @@ export class UsersComponent implements OnInit {
   toggle(e: any, id: any) {
     if (e) {
       this.spinner.show();
-      this.service.PostService({ id: id }, 'Master/SubcategoryActiveDeactive').subscribe(res => {
+      this.service.PostService({ id: id }, 'UserManagement/UserActiveDeactive').subscribe(res => {
         this.spinner.hide();
         if (res.body.result.isSuccess) {
           this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
@@ -61,7 +67,7 @@ export class UsersComponent implements OnInit {
       })
     }
   }
-  delete(action: any, name: any, id: any) {
+  delete(action: any, name: any, id: any, type: any) {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '500px',
       data: { action: action, Title: name }
@@ -69,7 +75,13 @@ export class UsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.spinner.show();
-        this.service.PostService({ id: id }, 'Master/SubcategoryDelete').subscribe(res => {
+        let delData = [];
+        if (type == 'single') {
+          delData.push(id);
+        } else {
+          delData = id;
+        }
+        this.service.PostService(delData, 'UserManagement/UsersDeleteByRange').subscribe(res => {
           this.spinner.hide();
           if (res.body.result.isSuccess) {
             this.list();
@@ -81,5 +93,14 @@ export class UsersComponent implements OnInit {
       }
     });
   }
+  noCheck(e: any, id: any) {
+    if (e.checked) {
+      this.deleteIds.push(id);
+    } else {
+      const index = this.deleteIds.findIndex(x => x == id);
+      this.deleteIds.splice(index, 1);
+    }
+    console.log(this.deleteIds);
 
+  }
 }
