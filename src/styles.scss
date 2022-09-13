@@ -58,3 +58,14 @@ body {
         right: 0px;
     }
 }
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
+.table thead th {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+.tdimg{ width: 100px !important;
+    height: 100px !important;
+    object-fit: cover;
+    border-radius: 50%;}

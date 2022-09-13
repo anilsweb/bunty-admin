@@ -31,7 +31,7 @@ export class WallpaperComponent implements OnInit {
 
   list() {
     this.spinner.show();
-    this.service.PostService(this.modal, 'Master/SubcategoryList').subscribe(res => {
+    this.service.PostService(this.modal, 'Master/WallpapersList').subscribe(res => {
       console.log(res);
       this.catList = res.body.result;
       this.spinner.hide();

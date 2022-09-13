@@ -9,6 +9,8 @@ import { CommonService } from 'src/app/common.service';
 })
 export class HomeComponent implements OnInit {
 
+  getData: any = {};
+
   constructor(
     private service: CommonService,
     private spinner: NgxSpinnerService,
@@ -22,7 +24,7 @@ export class HomeComponent implements OnInit {
     this.service.getservice({}, 'Master/GetDashboardData').subscribe(res => {
       console.log(res);
       this.spinner.hide();
-      // this.catList = res.body.result;
+      this.getData = res.body.result;
     })
   }
 

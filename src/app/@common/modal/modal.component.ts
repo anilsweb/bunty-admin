@@ -19,6 +19,7 @@ export class ModalComponent implements OnInit {
   modelSubCategory: any = {};
   modelWallpaper: any = {};
   cateogyList: any[] = [];
+  subCateogyList: any[] = [];
   modelUser: any = {};
   roleList: any[] = [];
 
@@ -44,7 +45,7 @@ export class ModalComponent implements OnInit {
       this.modelSubCategory = this.modalData.obj;
       this.url = this.modelSubCategory.imageURL;
     }
-    if (this.modalAction == 'addSubCategory' || this.modalAction == 'editSubCategory' || this.modalAction == 'addWallpaper' ||  this.modalAction == 'editWallpaper') {
+    if (this.modalAction == 'addSubCategory' || this.modalAction == 'editSubCategory' || this.modalAction == 'addWallpaper' || this.modalAction == 'editWallpaper') {
       this.categoryDropDown();
     }
     if (this.modalAction == 'addUser' || this.modalAction == 'editUser') {
@@ -119,8 +120,28 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  onSubmitWallpaper(type: any){
-
+  onSubmitWallpaper(type: any) {
+    if (this.modelWallpaper.imageURL) {
+      console.log(this.modelWallpaper);
+      this.spinner.show();
+      console.log(type);
+      let apiName;
+      if (type == 'add') {
+        apiName = 'Master/WallpaperSave';
+      } else {
+        apiName = 'Master/WallpaperSave';
+      }
+      this.service.PostService([this.modelWallpaper], apiName).subscribe(res => {
+        this.spinner.hide();
+        console.log(res);
+        if (res.body.status) {
+          this.dialogRef.close(this.modelWallpaper);
+          this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
+        } else {
+          this.service.snackbarOpen(res.body.result.message, 'x', 'danger-snackbar');
+        }
+      })
+    }
   }
 
   onSelectFile(event: any, name: any, modal: any) {
@@ -162,6 +183,15 @@ export class ModalComponent implements OnInit {
         this.service.snackbarOpen(res?.body?.result?.message, 'x', 'danger-snackbar');
       }
     })
+  }
+
+  getCategory(e: any) {
+    console.log(e.value);
+    this.spinner.show();
+    this.service.getservice({}, `Master/SubcategoryDropdownList?categoryid=${e.value}`).subscribe(res => {
+      this.spinner.hide();
+      this.subCateogyList = res.body.result;
+    });
   }
 
 }
