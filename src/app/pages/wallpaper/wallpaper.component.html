@@ -23,10 +23,10 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-default" style="height: 37px;
+        <button type="button" class="btn btn-primary" style="height: 37px;
         margin-top: 28px;
-        margin-left: 15px;"><i
-            class="fa-solid fa-plus"></i> Add</button>
+        margin-left: 15px;" (click)="add('addWallpaper', 'Add Wallpaper', {})"><i class="fa-solid fa-plus"></i>
+            Add</button>
     </div>
 </div>
 <!-- <div class="card mb-4">
@@ -51,13 +51,18 @@
         </div>
     </div>
 </div> -->
+<div class="text-right" *ngIf="deleteIds.length > 0">
+    <button type="button" class="btn btn-danger mb-2" (click)="delete('delete', 'Delete', deleteIds, 'multiple')"><i
+            class="fa-solid fa-trash"></i>
+        Delete</button>
+</div>
 <div class="card table-responsive">
     <table class="table table-bordered mb-0">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Category</th>
-                <th>Sub Category</th>
+                <th>Category Name</th>
+                <th>Sub Category Name</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Image</th>
@@ -69,28 +74,31 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let list of [0,1,2,3,4]; let i = index">
-                <td>{{i + 1}}</td>
-                <td>One</td>
-                <td>Two</td>
-                <td>Jelwely</td>
-                <td>Lorem Ipsum</td>
-                <td><a href="#">NA.jpg</a></td>
+            <tr *ngFor="let list of catList; let i = index">
                 <td>
-                    <label class="switcher">
-                        <input type="checkbox" class="switcher-input">
-                        <span class="switcher-indicator">
-                            <span class="switcher-yes"></span>
-                            <span class="switcher-no"></span>
-                        </span>
-                    </label>
+                    <mat-checkbox class="no-checkbox" (change)="noCheck($event, list.id)"></mat-checkbox>{{i + 1}}
                 </td>
-                <td>5</td>
-                <td>25</td>
-                <td>11 Aug, 2022</td>
+                <td>{{list?.categoryName}}</td>
+                <td>{{list?.name}}</td>
                 <td>
-                    <i class="fa-solid fa-pencil mr-2" style="cursor: pointer;"></i>
-                    <i class="fa-solid fa-trash-can" style="cursor: pointer;"></i>
+                    <img [src]="list?.imageURL" onerror="this.src='/assets/images/dummy.png'" class="tdimg" alt="">
+                </td>
+                <td>
+                    <mat-slide-toggle [(ngModel)]="list.isActive" name="isActive_{{i}}"
+                        (change)="toggle($event, list?.id)"></mat-slide-toggle>
+                </td>
+                <td>{{list?.lastUpdate | date}}</td>
+                <td>
+                    <div class="d-flex">
+                        <span class="btn-action" matTooltip="Edit"
+                            (click)="add('editSubCategory', 'Edit Sub Category', list)">
+                            <i class="fa-solid fa-pencil"></i>
+                        </span>
+                        <span class="btn-action" matTooltip="Delete"
+                            (click)="delete('delete', 'Delete', list.id, 'single')">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </span>
+                    </div>
                 </td>
             </tr>
         </tbody>

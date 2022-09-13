@@ -17,6 +17,7 @@ export class ModalComponent implements OnInit {
   url: any;
   selectedfiles: any;
   modelSubCategory: any = {};
+  modelWallpaper: any = {};
   cateogyList: any[] = [];
   modelUser: any = {};
   roleList: any[] = [];
@@ -43,7 +44,7 @@ export class ModalComponent implements OnInit {
       this.modelSubCategory = this.modalData.obj;
       this.url = this.modelSubCategory.imageURL;
     }
-    if (this.modalAction == 'addSubCategory' || this.modalAction == 'editSubCategory') {
+    if (this.modalAction == 'addSubCategory' || this.modalAction == 'editSubCategory' || this.modalAction == 'addWallpaper' ||  this.modalAction == 'editWallpaper') {
       this.categoryDropDown();
     }
     if (this.modalAction == 'addUser' || this.modalAction == 'editUser') {
@@ -116,6 +117,10 @@ export class ModalComponent implements OnInit {
         }
       })
     }
+  }
+
+  onSubmitWallpaper(type: any){
+
   }
 
   onSelectFile(event: any, name: any, modal: any) {

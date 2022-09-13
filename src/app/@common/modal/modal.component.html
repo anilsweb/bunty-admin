@@ -73,14 +73,65 @@
     </mat-dialog-actions>
 </form>
 
-<form *ngIf="modalAction == 'addUser' || modalAction == 'editUser'"
-    (ngSubmit)="f.form.valid && onSubmitUser()" #f="ngForm">
+<form *ngIf="modalAction == 'addWallpaper' || modalAction == 'editWallpaper'"
+    (ngSubmit)="f.form.valid && onSubmitWallpaper(modalAction == 'addWallpaper' ? 'add' : 'edit')" #f="ngForm">
+    <mat-dialog-content class="mat-typography">
+        <div class="form-row">
+            <div class="form-group col">
+                <label class="form-label">Select Category</label>
+                <mat-select class="form-control" [(ngModel)]="modelWallpaper.category_id" name="category_id"
+                    #category_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && category_id.invalid }" required>
+                    <mat-option *ngFor="let list of cateogyList" [value]="list?.id">{{list?.name}}</mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label class="form-label">Sub Category Name</label>
+                <mat-select class="form-control" [(ngModel)]="modelWallpaper.subcategory_id" name="subcategory_id"
+                    #subcategory_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && subcategory_id.invalid }"
+                    required>
+                    <mat-option *ngFor="let list of cateogyList" [value]="list?.id">{{list?.name}}</mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label class="form-label">Select Image <small class="text-muted">(Recommended resolution: 200x200,
+                        400x400)</small></label>
+                <label class="custom-file" [ngClass]="{ 'is-invalid': f.submitted && !url }">
+                    <input type="file" class="custom-file-input"
+                        (change)="onSelectFile($event, 'Wallpaper', modelWallpaper)">
+                    <span class="custom-file-label" style="padding-left: 15px;"></span>
+                </label>
+                <div *ngIf="url" class="mt-1">
+                    <img [src]="url" onError="this.src='assets/images/dummy.png'" alt=""
+                        style="object-fit: cover; height: 40px;  width: 100px;">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" rows="3" matInput  [(ngModel)]="modelWallpaper.description" name="description"
+                #description="ngModel" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }"
+                required></textarea>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="start" class="pt-0 pb-3">
+        <button type="submit" class="btn btn-primary">{{modalAction == 'addWallpaper' ? 'Save' : 'Update'}}</button>
+    </mat-dialog-actions>
+</form>
+
+<form *ngIf="modalAction == 'addUser' || modalAction == 'editUser'" (ngSubmit)="f.form.valid && onSubmitUser()"
+    #f="ngForm">
     <mat-dialog-content class="mat-typography">
         <div class="form-row">
             <div class="form-group col">
                 <label class="form-label">Name</label>
-                <input type="text" class="form-control" [(ngModel)]="modelUser.name" name="name"
-                    #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+                <input type="text" class="form-control" [(ngModel)]="modelUser.name" name="name" #name="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
             </div>
         </div>
         <div class="form-row">
@@ -94,7 +145,8 @@
             <div class="form-group col">
                 <label class="form-label">Email</label>
                 <input type="text" class="form-control" [(ngModel)]="modelUser.email" name="email" #email="ngModel"
-                    [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email [disabled]="modalAction == 'editUser'">
+                    [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email
+                    [disabled]="modalAction == 'editUser'">
             </div>
         </div>
         <div class="form-row">
