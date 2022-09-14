@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalComponent } from 'src/app/@common/modal/modal.component';
 import { CommonService } from 'src/app/common.service';
@@ -10,10 +11,13 @@ import { CommonService } from 'src/app/common.service';
   styleUrls: ['./sub-category.component.scss']
 })
 export class SubCategoryComponent implements OnInit {
-
-  modal = {
-    "pageIndex": 1,
-    "pageSize": 10,
+  TableIndex: number = 0;
+  pageIndex: number = 0;
+  pageSize: number = 10;
+  pageSizeOptions: number[] = [5, 10, 15, 20];
+  length: number = 20;
+  pageEvent: any = PageEvent;
+  modal: any = {
     "searchText": null
   }
   catList: any[] = [];
@@ -26,18 +30,27 @@ export class SubCategoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.list();
+    this.list(1,10);
   }
 
-  list() {
+  list(offset: any, limit: any) {
     this.spinner.show();
+    this.modal.pageIndex = offset;
+    this.modal.pageSize = limit;
     this.service.PostService(this.modal, 'Master/SubcategoryList').subscribe(res => {
       console.log(res);
       this.catList = res.body.result;
+      this.length = res.body.totalCount;
       this.spinner.hide();
     })
   }
 
+  getPage(event: any) {
+    let offset;
+    offset = event.pageIndex + 1;
+    this.TableIndex = event.pageIndex * event.pageSize;
+    this.list(offset, event.pageSize);
+  }
   add(action: any, name: any, obj: any) {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '500px',
@@ -45,7 +58,7 @@ export class SubCategoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.list();
+        this.list(1, 10);
       }
     });
   }
@@ -89,7 +102,7 @@ export class SubCategoryComponent implements OnInit {
         this.service.PostService(delData, 'Master/SubcategoryDeleteByRange').subscribe(res => {
           this.spinner.hide();
           if (res.body.result.isSuccess) {
-            this.list();
+            this.list(1,10);
             this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
           } else {
             this.service.snackbarOpen(res.body.result.message, 'x', 'danger-snackbar');

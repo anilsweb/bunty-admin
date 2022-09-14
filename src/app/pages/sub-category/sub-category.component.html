@@ -41,7 +41,7 @@
         <tbody>
             <tr *ngFor="let list of catList; let i = index">
                 <td>
-                    <mat-checkbox class="no-checkbox" (change)="noCheck($event, list.id)"></mat-checkbox>{{i + 1}}
+                    <mat-checkbox class="no-checkbox" (change)="noCheck($event, list.id)"></mat-checkbox>{{TableIndex+i + 1}}
                 </td>
                 <td>{{list?.categoryName}}</td>
                 <td>{{list?.name}}</td>
@@ -67,4 +67,8 @@
             </tr>
         </tbody>
     </table>
+    <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent = getPage($event)" [showFirstLastButtons]="true"
+        style="margin: 0 20px 10px; overflow: hidden;">
+    </mat-paginator>
 </div>

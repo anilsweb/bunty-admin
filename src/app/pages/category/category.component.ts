@@ -14,11 +14,11 @@ export class CategoryComponent implements OnInit {
   catList: any[] = [];
   deleteIds: any[] = [];
 
-  TableIndex: number = 1;
-  pageIndex: number = 1;
+  TableIndex: number = 0;
+  pageIndex: number = 0;
   pageSize: number = 10;
-  pageSizeOptions: number[] = [10, 20, 50];
-  length: number | undefined;
+  pageSizeOptions: number[] = [5, 10, 15, 20];
+  length: number = 20;
   pageEvent: any = PageEvent;
 
   constructor(
@@ -45,11 +45,9 @@ export class CategoryComponent implements OnInit {
       this.length = res.body.totalCount;
     })
   }
-  pageselect(event: any) {
-    console.log(event);
-    
+  getPage(event: any) {
     let offset;
-    offset = event.pageIndex * event.pageSize;
+    offset = event.pageIndex + 1;
     this.TableIndex = event.pageIndex * event.pageSize;
     this.list(offset, event.pageSize);
   }

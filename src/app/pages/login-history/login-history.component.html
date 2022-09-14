@@ -4,19 +4,22 @@
         <div class="form-row">
             <div class="form-group" style="width: 200px;">
                 <label class="form-label">Select User Name</label>
-                <mat-select class="form-control" placeholder="Select" [(ngModel)]="modal.UserId" name="UserId" (selectionChange)="list()">
+                <mat-select class="form-control" placeholder="Select" [(ngModel)]="modal.UserId" name="UserId"
+                    (selectionChange)="list(1,10)">
                     <mat-option *ngFor="let list of userDropdownList" [value]="list?.id">{{list?.name}}</mat-option>
                 </mat-select>
             </div>
             <div class="form-group" style="width: 200px;margin-left: 10px;">
                 <label class="form-label">Select Login Status</label>
-                <mat-select class="form-control" placeholder="Select" [(ngModel)]="modal.LoginStatusCode" name="LoginStatusCode" (selectionChange)="list()">
+                <mat-select class="form-control" placeholder="Select" [(ngModel)]="modal.LoginStatusCode"
+                    name="LoginStatusCode" (selectionChange)="list(1,10)">
                     <mat-option *ngFor="let list of loginStatus" [value]="list?.id">{{list?.name}}</mat-option>
                 </mat-select>
             </div>
             <div class="form-group position-relative filter-datepic" style="width: 200px;margin-left: 10px;">
                 <label class="form-label">Login Date</label>
-                <input type="text" class="form-control" (click)="picker1.open()" [matDatepicker]="picker1" [(ngModel)]="modal.LoginTime" name="LoginTime" (dateChange)="list()">
+                <input type="text" class="form-control" (click)="picker1.open()" [matDatepicker]="picker1"
+                    [(ngModel)]="modal.LoginTime" name="LoginTime" (dateChange)="list(1,10)">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
             </div>
@@ -37,7 +40,7 @@
         <tbody>
             <tr *ngFor="let list of userList; let i = index">
                 <td>
-                    {{i + 1}}
+                    {{TableIndex + i + 1}}
                 </td>
                 <td>{{list?.userName}}</td>
                 <td>{{list?.ipAddress}}</td>
@@ -50,4 +53,8 @@
             </tr>
         </tbody>
     </table>
+    <mat-paginator [pageIndex]="pageIndex" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent = getPage($event)" [showFirstLastButtons]="true"
+        style="margin: 0 20px 10px; overflow: hidden;">
+    </mat-paginator>
 </div>
