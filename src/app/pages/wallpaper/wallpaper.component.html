@@ -56,105 +56,39 @@
             class="fa-solid fa-trash"></i>
         Delete</button>
 </div>
-<div class="card table-responsive">
-    <table class="table table-bordered mb-0">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Category Name</th>
-                <th>Sub Category Name</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>Active / Deactive</th>
-                <th>Download</th>
-                <th>View</th>
-                <th>Updated On</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let list of catList; let i = index">
-                <td>
-                    <mat-checkbox class="no-checkbox" (change)="noCheck($event, list.id)"></mat-checkbox>{{i + 1}}
-                </td>
-                <td>{{list?.categoryName}}</td>
-                <td>{{list?.name}}</td>
-                <td>
-                    <img [src]="list?.imageURL" onerror="this.src='/assets/images/dummy.png'" class="tdimg" alt="">
-                </td>
-                <td>
-                    <mat-slide-toggle [(ngModel)]="list.isActive" name="isActive_{{i}}"
-                        (change)="toggle($event, list?.id)"></mat-slide-toggle>
-                </td>
-                <td>{{list?.lastUpdate | date}}</td>
-                <td>
-                    <div class="d-flex">
-                        <span class="btn-action" matTooltip="Edit"
-                            (click)="add('editSubCategory', 'Edit Sub Category', list)">
-                            <i class="fa-solid fa-pencil"></i>
-                        </span>
-                        <span class="btn-action" matTooltip="Delete"
-                            (click)="delete('delete', 'Delete', list.id, 'single')">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </span>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
 
-<!-- Modal template -->
-<div class="modal fade" id="modals-default">
-    <div class="modal-dialog">
-        <form class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Wallpaper
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+<div class="wallpaper-outer">
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 col-12" *ngFor="let list of catList">
+            <div class="block_wallpaper">
+                <div class="wall_category_block d-flex justify-content-between align-items-center">
+                    <mat-checkbox class="no-checkbox" (change)="noCheck($event, list.id)"></mat-checkbox>
+                    <div>
+                        <button mat-fab color="primary" aria-label="Example icon button with a delete icon"
+                            matTooltip="Edit">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" class="ml-2"
+                            matTooltip="Delete">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="wall_image_title">
+                    <ul class="list-inline d-flex justify-content-center">
+                        <li>
+                            <button mat-fab color="primary" aria-label="Example icon button with a delete icon"
+                                matTooltip="Category & Sub Category">
+                                <mat-icon>info</mat-icon>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <span>
+                    <img [src]="list?.imageURL" onerror="this.src='/assets/images/dummy.png'" style="height: 350px;"
+                        alt="">
+                </span>
             </div>
-            <div class="modal-body">
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label class="form-label">Select Category</label>
-                        <select class="form-control">
-                            <option value="1">Select</option>
-                            <option value="3">Category 1</option>
-                            <option value="2">Category 2</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label class="form-label">Select Sub Category</label>
-                        <select class="form-control">
-                            <option value="1">Select</option>
-                            <option value="3">Category 1</option>
-                            <option value="2">Category 2</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label class="form-label">Image Upload</label>
-                        <label class="custom-file">
-                            <input type="file" class="custom-file-input">
-                            <span class="custom-file-label"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer pt-0">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

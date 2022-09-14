@@ -14,6 +14,7 @@ export class CommonService {
   ChatData = new Subject();
   headers: any = '';
   genralDetail = new BehaviorSubject({});
+  loginUserName = new BehaviorSubject({});
   constructor(
     public http: HttpClient,
     private snackBar: MatSnackBar,
