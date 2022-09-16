@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'wallpaper', component: WallpaperComponent,canActivate: [AuthGuard] },
   { path: 'users', component: UsersComponent,canActivate: [AuthGuard] },
   { path: 'reports', component: ReportsComponent,canActivate: [AuthGuard] },
-  { path: 'settings', component: SettingsComponent,canActivate: [AuthGuard] },
+  { path: 'settings', loadChildren: () => import("./pages/settings/settings.module").then(m => m.SettingsModule), canActivate: [AuthGuard] },
   { path: 'api-url', component: ApiUrlComponent,canActivate: [AuthGuard] },
   { path: 'log-history', component: LoginHistoryComponent,canActivate: [AuthGuard] },
 ];

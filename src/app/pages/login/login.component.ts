@@ -75,10 +75,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required],
-      browserName: [''],
-      browserVersion: [''],
-      ipAddress: [''],
-      osName: ['']
+      LoginLogs: [{}]
     });
   }
 
@@ -88,10 +85,10 @@ export class LoginComponent implements OnInit {
   updateProfile() {
     this.submitted = true;
     // LoginLogs
-    this.loginForm.value.browserName = this.windowData.BrowserName;
-    this.loginForm.value.browserVersion = this.windowData.BrowserVersion;
-    this.loginForm.value.ipAddress = this.windowData.IpAddress;
-    this.loginForm.value.osName = this.windowData.OSName;
+    this.loginForm.value.LoginLogs.browserName = this.windowData.BrowserName;
+    this.loginForm.value.LoginLogs.browserVersion = this.windowData.BrowserVersion;
+    this.loginForm.value.LoginLogs.ipAddress = this.windowData.IpAddress;
+    this.loginForm.value.LoginLogs.osName = this.windowData.OSName;
     if (this.loginForm.valid) {
       this.spinner.show();
       this.service.PostService(this.loginForm.value, 'Account/Login')

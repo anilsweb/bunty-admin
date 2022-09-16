@@ -12,7 +12,6 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UsersComponent } from './pages/users/users.component';
 import { ReportsComponent } from './pages/reports/reports.component';
-import { SettingsComponent } from './pages/settings/settings.component';
 import { ApiUrlComponent } from './pages/api-url/api-url.component';
 import { AuthGuard } from './auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,7 +39,6 @@ import { LoginHistoryComponent } from './pages/login-history/login-history.compo
     HomeComponent,
     UsersComponent,
     ReportsComponent,
-    SettingsComponent,
     ApiUrlComponent,
     ChangePasswordComponent,
     ModalComponent,
