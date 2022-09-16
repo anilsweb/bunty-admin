@@ -87,6 +87,7 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
   updateProfile() {
     this.submitted = true;
+    // LoginLogs
     this.loginForm.value.browserName = this.windowData.BrowserName;
     this.loginForm.value.browserVersion = this.windowData.BrowserVersion;
     this.loginForm.value.ipAddress = this.windowData.IpAddress;

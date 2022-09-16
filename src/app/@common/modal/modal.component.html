@@ -80,7 +80,7 @@
             <div class="form-group col">
                 <label class="form-label">Select Category</label>
                 <mat-select class="form-control" [(ngModel)]="modelWallpaper.category_id" name="category_id"
-                    #category_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && category_id.invalid }" required (selectionChange)="getCategory($event)">
+                    #category_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && category_id.invalid }" required (selectionChange)="getCategory($event.value)">
                     <mat-option *ngFor="let list of cateogyList" [value]="list?.id">{{list?.name}}</mat-option>
                 </mat-select>
             </div>

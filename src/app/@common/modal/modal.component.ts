@@ -48,11 +48,18 @@ export class ModalComponent implements OnInit {
     if (this.modalAction == 'addSubCategory' || this.modalAction == 'editSubCategory' || this.modalAction == 'addWallpaper' || this.modalAction == 'editWallpaper') {
       this.categoryDropDown();
     }
+    if (this.modalAction == 'editWallpaper') {
+      this.getCategory(this.modalData?.obj?.category_id);
+    }
     if (this.modalAction == 'addUser' || this.modalAction == 'editUser') {
       this.roleDropDown();
     }
     if (this.modalAction == 'editUser') {
       this.modelUser = this.modalData.obj;
+    }
+    if (this.modalAction == 'editWallpaper') {
+      this.modelWallpaper = this.modalData.obj;
+      this.url = this.modelWallpaper.imageURL;
     }
   }
 
@@ -186,9 +193,8 @@ export class ModalComponent implements OnInit {
   }
 
   getCategory(e: any) {
-    console.log(e.value);
     this.spinner.show();
-    this.service.getservice({}, `Master/SubcategoryDropdownList?categoryid=${e.value}`).subscribe(res => {
+    this.service.getservice({}, `Master/SubcategoryDropdownList?categoryid=${e}`).subscribe(res => {
       this.spinner.hide();
       this.subCateogyList = res.body.result;
     });

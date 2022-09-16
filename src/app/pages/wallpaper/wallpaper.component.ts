@@ -53,7 +53,7 @@ export class WallpaperComponent implements OnInit {
   toggle(e: any, id: any) {
     if (e) {
       this.spinner.show();
-      this.service.PostService({ id: id }, 'Master/SubcategoryActiveDeactive').subscribe(res => {
+      this.service.PostService({ id: id }, 'Master/WallpapersActiveDeactive').subscribe(res => {
         this.spinner.hide();
         if (res.body.result.isSuccess) {
           this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
@@ -87,7 +87,7 @@ export class WallpaperComponent implements OnInit {
         } else {
           delData = id;
         }
-        this.service.PostService(delData, 'Master/SubcategoryDeleteByRange').subscribe(res => {
+        this.service.PostService(delData, 'Master/WallpapersDeleteByRange').subscribe(res => {
           this.spinner.hide();
           if (res.body.result.isSuccess) {
             this.list();
