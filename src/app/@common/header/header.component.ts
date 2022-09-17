@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common.service';
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
     public router: Router,
     private titleService: Title,
     private service: CommonService,
+    @Inject(DOCUMENT) private documents: Document
   ) {
     this.service.genralDetail.subscribe(res => {
       this.genData = res;
@@ -50,6 +52,17 @@ export class HeaderComponent implements OnInit {
       console.log(res);
       this.service.genralDetail.next(res.body.result);
     })
+    this.documents.body.classList.add('light-theme');
+  }
+
+  themeChange(e: any) {
+    if (e.checked) {
+      this.documents.body.classList.add('dark-theme');
+      this.documents.body.classList.remove('light-theme');
+    } else {
+      this.documents.body.classList.add('light-theme');
+      this.documents.body.classList.remove('dark-theme');
+    }
   }
 
 }
