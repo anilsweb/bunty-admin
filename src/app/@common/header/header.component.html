@@ -1,10 +1,10 @@
 <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x" id="layout-navbar">
     <!-- Brand demo (see assets/css/demo/demo.css) -->
-    <a href="index.html" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
+    <a routerLink="." class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
         <span class="app-brand-logo demo">
-            <img src="assets/images/logo-dark.png" alt="Brand Logo" class="img-fluid">
+            <img src="{{this.genData.logo}}" onerror="this.src='/assets/images/dummy.png'" alt="Brand Logo" class="img-fluid">
         </span>
-        <span class="app-brand-text demo font-weight-normal ml-2">Auric</span>
+        <span class="app-brand-text demo font-weight-normal ml-2">{{this.genData.title}}</span>
     </a>
 
     <!-- Sidenav toggle (see assets/css/demo/demo.css) -->

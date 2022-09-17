@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { CommonService } from 'src/app/common.service';
 
 @Component({
@@ -12,11 +14,20 @@ export class HeaderComponent implements OnInit {
   user: any;
   userSub: any;
   userObj: any;
+  genData: any;
+  favIcon: any = document.querySelector('#favIcon')
+
 
   constructor(
+    public router: Router,
+    private titleService: Title,
     private service: CommonService,
   ) {
-
+    this.service.genralDetail.subscribe(res => {
+      this.genData = res;
+      this.titleService.setTitle(this.genData.title);
+      this.favIcon.href = this.genData?.favicon ? this.genData?.favicon : '/assets/images/dummy.png';
+    })
 
 
   }

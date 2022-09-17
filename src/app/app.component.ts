@@ -10,6 +10,7 @@ import { CommonService } from './common.service';
 })
 export class AppComponent {
   genData: any;
+  favIcon: any = document.querySelector('#favIcon')
   constructor(
     public router: Router,
     private titleService: Title,
@@ -18,6 +19,7 @@ export class AppComponent {
     this.service.genralDetail.subscribe(res => {
       this.genData = res;
       this.titleService.setTitle(this.genData.title);
+      this.favIcon.href = this.genData?.favicon ? this.genData?.favicon : '/assets/images/dummy.png';
     })
   }
 }
