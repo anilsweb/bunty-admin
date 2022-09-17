@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/common.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  genData: any;
+  constructor(
+    private service: CommonService,
+  ) {
+    this.service.genralDetail.subscribe(res => {
+      this.genData = res;
+    })
   }
-
+  ngOnInit(): void {
+    
+  }
 }

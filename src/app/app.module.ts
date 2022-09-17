@@ -25,6 +25,7 @@ import { MaterialModule } from './@common/material.module';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { ModalComponent } from './@common/modal/modal.component';
 import { LoginHistoryComponent } from './pages/login-history/login-history.component';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 
 @NgModule({
@@ -56,11 +57,12 @@ import { LoginHistoryComponent } from './pages/login-history/login-history.compo
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    CKEditorModule
   ],
   exports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CKEditorModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
