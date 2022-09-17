@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/common.service';
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   LoginResult: any;
   submitted = false;
   windowData: any = {}
-
+  genData: any;
+  favIcon: any = document.querySelector('#favIcon')
   constructor(
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
@@ -25,8 +27,15 @@ export class LoginComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     public _http: HttpClient,
+    private titleService: Title,
 
   ) {
+    this.service.genralDetail.subscribe(res => {
+      this.genData = res;
+      this.titleService.setTitle(this.genData.title);
+      this.favIcon.href = this.genData?.favicon ? this.genData?.favicon : '/assets/images/dummy.png';
+    })
+
     this._http.get<any>('https://jsonip.com')
       .subscribe(data => {
         this.windowData.IpAddress = data.ip;

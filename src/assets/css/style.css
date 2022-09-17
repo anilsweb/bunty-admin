@@ -12468,7 +12468,7 @@ a:hover {
 
 .ui-w-30 {
     width: 30px !important;
-    height: auto;
+    height: 30px !important;
 }
 
 .ui-w-20 {

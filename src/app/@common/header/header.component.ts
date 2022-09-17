@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   userObj: any;
   genData: any;
   favIcon: any = document.querySelector('#favIcon')
-
+  userImg: any
 
   constructor(
     public router: Router,
@@ -44,6 +44,7 @@ export class HeaderComponent implements OnInit {
         this.userObj = localStorage.getItem('loginData');
         const userData = JSON.parse(this.userObj);
         this.userName = userData?.name;
+        this.userImg = userData?.profileImage;
         console.log(this.userName);
 
       }
