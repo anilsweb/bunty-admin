@@ -21,6 +21,12 @@ export class GeneralSettingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.service.genralDetail.subscribe(res => {
+      this.model = res;
+      this.logoLightUrl = this.model.logo;
+      this.logoDarkUrl = this.model.logoDark;
+      this.favIconUrl = this.model.favicon;
+    })
   }
 
   onSelectFile(event: any, name: any, modal: any) {
