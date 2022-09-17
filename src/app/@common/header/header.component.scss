@@ -1,0 +1,29 @@
+::ng-deep{
+    .theme-toggle{ position: relative;
+        .mat-slide-toggle-bar{width: 50px; height: 26px; border-radius: 50px;
+            &::before, &::after{
+                position: absolute;
+                content: "\f185";
+                right: 5px;
+                font-family: "Font Awesome 6 Free";
+                font-weight: 900;
+                color: #f39c12;
+                top: 1.5px;
+                font-size: 15px;
+            }
+            &::before{
+                content: "\f186";
+                left: 5px;
+                font-size: 20px;
+            }
+        }
+        .mat-slide-toggle-thumb{height: 22px; width: 22px; top: 5px; left: 2px; position: relative;}
+        .mat-slide-toggle.mat-checked .mat-slide-toggle-bar, .mat-slide-toggle-bar {
+            background-color: #111;
+        }
+        .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+            background-color: #fff; left: auto; right: -10px;
+        }
+        .mat-slide-toggle.mat-checked .mat-ripple-element, .mat-slide-toggle:not(.mat-checked) .mat-ripple-element{background-color: inherit;}
+    }
+}
