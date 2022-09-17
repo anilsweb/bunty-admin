@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/common.service';
@@ -13,12 +14,20 @@ export class ForgotPasswordComponent implements OnInit {
 
   registerForm!: FormGroup;
   submitted = false;
-
+  favIcon: any = document.querySelector('#favIcon')
+  genData: any;
   constructor(private formBuilder: FormBuilder,
     private service: CommonService,
     private spinner: NgxSpinnerService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private titleService: Title,
+  ) {
+    this.service.genralDetail.subscribe(res => {
+      this.genData = res;
+      this.titleService.setTitle(this.genData.title);
+      this.favIcon.href = this.genData?.favicon ? this.genData?.favicon : '/assets/images/dummy.png';
+    })
+   }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({

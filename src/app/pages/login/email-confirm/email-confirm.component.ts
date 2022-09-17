@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/common.service';
@@ -16,6 +17,8 @@ export class EmailConfirmComponent implements OnInit {
   verifyData: any;
   registerForm!: FormGroup;
   submitted = false;
+  favIcon: any = document.querySelector('#favIcon')
+  genData: any;
 
   constructor(
     private service: CommonService,
@@ -23,7 +26,14 @@ export class EmailConfirmComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-  ) { }
+    private titleService: Title,
+  ) {
+    this.service.genralDetail.subscribe(res => {
+      this.genData = res;
+      this.titleService.setTitle(this.genData.title);
+      this.favIcon.href = this.genData?.favicon ? this.genData?.favicon : '/assets/images/dummy.png';
+    })
+   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
