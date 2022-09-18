@@ -8,25 +8,27 @@ import { CommonService } from 'src/app/common.service';
   styleUrls: ['./privacy.component.scss']
 })
 export class PrivacyComponent implements OnInit {
-
-  model: any = {};
+  model: any = {privacyPolicy:'test'}
+  resumeEditorCreation: any
 
   constructor(
     private service: CommonService,
     private spinner: NgxSpinnerService,
-  ) { }
+  ) { 
+    this.spinner.show();
+    this.service.getservice({}, 'Settings/GetPrivacyPolicy').subscribe(res => {
+      this.spinner.hide();
+        this.model = res.body.result;
+    })
+    
+  }
 
   ngOnInit(): void {
-    this.spinner.show();
-    this.service.PostService(this.model, 'Settings/GetPrivacyPolicy').subscribe(res => {
-      this.spinner.hide();
-      this.model = res;
-    })
   }
 
   onSubmit() {
       this.spinner.show();
-      this.service.PostService(this.model, 'Settings/GeneralDetailsSave').subscribe(res => {
+      this.service.PostService(this.model, 'Settings/PrivacyPolicySaveUpdate').subscribe(res => {
         this.spinner.hide();
         console.log(res);
         if (res.body.status) {

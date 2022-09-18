@@ -1,13 +1,12 @@
 <div class="order-md-1 w-100 p-4">
-    <form class="needs-validation" novalidate="">
+    <form class="needs-validation" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
 
         <div class="mb-3">
             <label for="AppPrivacyPolicy">App Privacy Policy</label>
-            <!-- <textarea type="text" class="form-control" id="AppPrivacyPolicy"></textarea> -->
-            <!-- <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor> -->
-            <ckeditor data="<p>Hello, world!</p>"></ckeditor>
-            <div class="invalid-feedback">
-                Please enter App Privacy Policy.
+            <ckeditor [(ngModel)]="model.privacyPolicy" name="privacyPolicy"  #privacyPolicy="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && privacyPolicy.invalid }" required></ckeditor>
+            <div class="invalid-feedback" *ngIf="f.submitted && privacyPolicy.invalid">
+                Please Write App Privacy Policy.
             </div>
         </div>
 
