@@ -1,73 +1,84 @@
-<form class="w-50 p-4">
+<form class="w-50 p-4"  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
 
     <div class="mb-3">
         <label for="Appname">App Name</label>
-        <input type="text" class="form-control" id="Appname">
-        <div class="invalid-feedback">
+        <input type="text" class="form-control" id="Appname" [(ngModel)]="model.appName" name="appName"  #appName="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && appName.invalid }" required>
+        <div class="invalid-feedback"  *ngIf="f.submitted && appName.invalid">
             Please enter App Name.
         </div>
     </div>
 
     <div class="mb-3">
-        <label for="AppLogo">App Logo</label>
-        <input type="file" class="form-control" id="AppLogo">
-        <div class="invalid-feedback">
-            Please enter App Logo.
+        <label class="form-label">App Logo</label>
+        <label class="custom-file" [ngClass]="{ 'is-invalid': f.submitted && !logoLightUrl }">
+            <input type="file" class="custom-file-input" (change)="onSelectFile($event, 'LogoLight', model)">
+            <span class="custom-file-label" style="padding-left: 15px;"></span>
+        </label>
+        <div *ngIf="logoLightUrl" class="mt-1">
+            <img [src]="logoLightUrl" onError="this.src='assets/images/dummy.png'" alt="" style="height: 50px">
         </div>
     </div>
 
     <div class="mb-3">
         <label for="AppDescription">App Description</label>
-        <textarea type="text" class="form-control" id="AppDescription"></textarea>
-        <div class="invalid-feedback">
+        <textarea type="text" class="form-control" id="AppDescription" [(ngModel)]="model.appDescription" name="appDescription"  #appDescription="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && appDescription.invalid }" required></textarea>
+        <div class="invalid-feedback"  *ngIf="f.submitted && appDescription.invalid">
             Please enter App Description.
         </div>
     </div>
 
     <div class="mb-3">
         <label for="AppVersion">App Version</label>
-        <input type="text" class="form-control" id="AppVersion">
-        <div class="invalid-feedback">
+        <input type="text" class="form-control" id="AppVersion" [(ngModel)]="model.appVersion" name="appVersion"  #appVersion="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && appVersion.invalid }" required>
+        <div class="invalid-feedback"  *ngIf="f.submitted && appVersion.invalid">
             Please enter App Version.
         </div>
     </div>
 
     <div class="mb-3">
         <label for="Author">Author</label>
-        <input type="text" class="form-control" id="Author">
-        <div class="invalid-feedback">
+        <input type="text" class="form-control" id="Author" [(ngModel)]="model.author" name="author"  #author="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && author.invalid }" required>
+        <div class="invalid-feedback"  *ngIf="f.submitted && author.invalid">
             Please enter Author.
         </div>
     </div>
 
     <div class="mb-3">
         <label for="Contact">Contact</label>
-        <input type="text" class="form-control" id="Contact">
-        <div class="invalid-feedback">
+        <input type="text" class="form-control" id="Contact" [(ngModel)]="model.contact" name="contact"  #contact="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && contact.invalid }" required>
+        <div class="invalid-feedback"  *ngIf="f.submitted && contact.invalid">
             Please enter Contact.
         </div>
     </div>
 
     <div class="mb-3">
         <label for="Email">Email</label>
-        <input type="email" class="form-control" id="Email">
-        <div class="invalid-feedback">
+        <input type="email" class="form-control" id="Email" [(ngModel)]="model.email" name="email"  #email="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required>
+        <div class="invalid-feedback"  *ngIf="f.submitted && email.invalid">
             Please enter Email.
         </div>
     </div>
 
     <div class="mb-3">
         <label for="Website">Website</label>
-        <input type="text" class="form-control" id="Website">
-        <div class="invalid-feedback">
+        <input type="text" class="form-control" id="Website" [(ngModel)]="model.website" name="website"  #website="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && website.invalid }" required>
+        <div class="invalid-feedback"  *ngIf="f.submitted && website.invalid">
             Please enter Website.
         </div>
     </div>
 
     <div class="mb-3">
         <label for="DevelopedBy">Developed By</label>
-        <input type="text" class="form-control" id="DevelopedBy">
-        <div class="invalid-feedback">
+        <input type="text" class="form-control" id="DevelopedBy" [(ngModel)]="model.developedBy" name="developedBy"  #developedBy="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && developedBy.invalid }" required>
+        <div class="invalid-feedback"  *ngIf="f.submitted && developedBy.invalid">
             Please enter Developed By.
         </div>
     </div>
