@@ -76,6 +76,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 .light-theme {
     --backgorund: #f2f3f8;
     --backgorund-white: #fff;
+    --input-disable: #fff;
     --pagination-border: rgba(0,0,0,.42);
     --border-card: #dee2e6;
     --hover-bg: #f2f3f8;
@@ -102,6 +103,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     --browser-bg: #262735;
     --mat-placeholder: rgba(255,255,255,.42);
     --mat-dialog-container: rgba(255,255,255,.87);
+    --input-disable: #21232f;
 }
 
 body {
@@ -2112,7 +2114,7 @@ pre code {
 }
 
 .form-control:disabled, .form-control[readonly] {
-    background-color: #e9ecef;
+    background-color: var(--input-disable);
     opacity: 1;
 }
 

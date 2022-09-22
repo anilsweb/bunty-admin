@@ -26,6 +26,9 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
 import { ModalComponent } from './@common/modal/modal.component';
 import { LoginHistoryComponent } from './pages/login-history/login-history.component';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -57,14 +60,18 @@ import { CKEditorModule } from 'ckeditor4-angular';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    CKEditorModule
+    CKEditorModule,
+    MatDatepickerModule, MatMomentDateModule
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
     CKEditorModule
   ],
-  providers: [AuthGuard],
-  bootstrap: [AppComponent]
+  providers: [AuthGuard,
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
+  ],
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

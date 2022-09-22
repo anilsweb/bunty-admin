@@ -26,6 +26,11 @@
         </div>
     </div>
 </div>
+<div class="mb-4 d-flex justify-content-end" style="margin-top: -34px"
+    *ngIf="modal.UserId || modal.LoginStatusCode || modal.LoginTime">
+    <a href="javascript:void(0)" (click)="clearFilter()" style="text-decoration: underline;">Clear
+        Filter</a>
+</div>
 <div class="card table-responsive">
     <table class="table table-bordered mb-0">
         <thead>
@@ -44,7 +49,7 @@
                 <td>
                     {{TableIndex + i + 1}}
                 </td>
-                <td>{{list?.userName}}</td>
+                <td>{{list?.name}}</td>
                 <td>{{list?.ipAddress}}</td>
                 <td>{{list?.browserName}} <br> <small>Version - {{list?.browserVersion ? list?.browserVersion :
                         'NA'}}</small></td>

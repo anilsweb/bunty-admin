@@ -1,12 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { PageEvent } from '@angular/material/paginator';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/common.service';
 
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
+
 @Component({
   selector: 'app-login-history',
   templateUrl: './login-history.component.html',
-  styleUrls: ['./login-history.component.scss']
+  styleUrls: ['./login-history.component.scss'],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ],
 })
 export class LoginHistoryComponent implements OnInit {
   TableIndex: number = 0;
@@ -36,7 +53,7 @@ export class LoginHistoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.list(1,10);
+    this.list(1, 10);
     this.userDropDown();
   }
 
@@ -66,5 +83,12 @@ export class LoginHistoryComponent implements OnInit {
     this.TableIndex = event.pageIndex * event.pageSize;
     this.list(offset, event.pageSize);
   }
-
+  clearFilter() {
+    this.modal = {
+      "UserId": 0, //filter
+      "LoginStatusCode": 0, //filter
+      "LoginTime": null //filter
+    }
+    this.list(1, 10)
+  }
 }
