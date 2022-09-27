@@ -27,8 +27,13 @@ export class WallpaperComponent implements OnInit {
 
   ngOnInit(): void {
     this.list();
+    this.cateList();
   }
+  cateList() {
+    this.service.PostService(this.modal, 'Master/CategoryDropdownList').subscribe(res => {
 
+    })
+  }
   list() {
     this.spinner.show();
     this.service.PostService(this.modal, 'Master/WallpapersList').subscribe(res => {

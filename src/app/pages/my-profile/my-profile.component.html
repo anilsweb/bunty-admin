@@ -3,8 +3,8 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-12">
-        <div class="card">
+    <div class="col-sm-8">
+        <div class="card h-100">
             <form class="card-body" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
                 <label class="form-label">Profile Image</label>
                 <div class="" style="width: 80px; margin-bottom: 1rem; position: relative;">
@@ -33,6 +33,16 @@
                     <button type="button" class="btn btn-primary" type="submit">Save</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card text-center py-5 h-100">
+            <img [src]="url" onError="this.src='assets/images/user.jpg'" alt=""
+                style="object-fit: cover; height: 150px;  width: 150px; border-radius: 50%;" class="mx-auto">
+            <h3 class="text-dark my-3">{{model?.name}} / {{model?.userName}}</h3>
+            <!-- <h5></h5> -->
+            <p class="mb-2">Last Update: {{model?.lastUpdate | date:'medium'}}</p>
+            <p class="mb-0">Created: {{model?.createdDate | date:'medium'}}</p>
         </div>
     </div>
 </div>
