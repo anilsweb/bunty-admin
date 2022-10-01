@@ -88,6 +88,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     --browser-bg: #e9ecef;
     --mat-placeholder: rgba(0,0,0,.42);
     --mat-dialog-container: rgba(0,0,0,.87);
+    --bg-light: #f8f9fa;
 }
 .dark-theme{
     --backgorund: #21232f;
@@ -104,6 +105,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     --mat-placeholder: rgba(255,255,255,.42);
     --mat-dialog-container: rgba(255,255,255,.87);
     --input-disable: #21232f;
+    --bg-light: #21232f;
 }
 
 body {
@@ -6799,7 +6801,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-    background-color: #f8f9fa !important;
+    background-color: var(--bg-light) !important;
 }
 
 a.bg-light:hover, a.bg-light:focus,

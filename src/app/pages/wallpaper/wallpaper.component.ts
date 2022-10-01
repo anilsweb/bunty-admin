@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { ModalComponent } from 'src/app/@common/modal/modal.component';
 import { CommonService } from 'src/app/common.service';
 
@@ -14,24 +15,48 @@ export class WallpaperComponent implements OnInit {
   modal = {
     "pageIndex": 1,
     "pageSize": 10,
-    "searchText": null
+    "searchText": '',
+    category_id: 0,
+    subcategory_id: 0,
   }
   catList: any[] = [];
   deleteIds: any[] = [];
+  category: any[] = [];
+  subCategory: any[] = [];
+
+  searchName: any;
+
+  public userQuestion!: string;
+  userQuestionUpdate = new Subject<string>();
 
   constructor(
     public dialog: MatDialog,
     private service: CommonService,
     private spinner: NgxSpinnerService,
-  ) { }
+  ) {
+    // Debounce search.
+    this.userQuestionUpdate.pipe(
+      debounceTime(400),
+      distinctUntilChanged())
+      .subscribe(value => {
+        this.modal.searchText = value;
+        this.list();
+      });
+  }
 
   ngOnInit(): void {
     this.list();
     this.cateList();
+    this.subCateList();
   }
   cateList() {
-    this.service.PostService(this.modal, 'Master/CategoryDropdownList').subscribe(res => {
-
+    this.service.getservice(this.modal, 'Master/CategoryDropdownList').subscribe(res => {
+      this.category = res.body.result;
+    })
+  }
+  subCateList() {
+    this.service.getservice(this.modal, 'Master/SubCategoryDropdownList').subscribe(res => {
+      this.subCategory = res.body.result;
     })
   }
   list() {

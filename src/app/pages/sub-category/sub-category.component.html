@@ -1,17 +1,22 @@
 <div class="page-title d-flex align-items-center justify-content-between mb-4">
     <h4 class="mb-0">Sub Category</h4>
     <div class="d-flex">
+        <div class="deleteall-btnout mr-3" *ngIf="deleteIds.length > 0">
+            <button type="button" class="btn btn-danger mb-2"
+                (click)="delete('delete', 'Delete', deleteIds, 'multiple')"><i class="fa-solid fa-trash"></i>
+                Delete</button>
+        </div>
         <div class="form-row">
             <div class="form-group" style="width: 200px;">
                 <label class="form-label">Select Category</label>
-                <select class="form-control">
-                    <option value="1">Select</option>
-                    <option value="3">Category 1</option>
-                    <option value="2">Category 2</option>
-                </select>
+                <mat-select class="form-control" placeholder="All" [(ngModel)]="modal.category_id" name="category_id"
+                    (selectionChange)="list(1, 10)">
+                    <mat-option [value]="0">All</mat-option>
+                    <mat-option *ngFor="let list of category" [value]="list?.id">{{list?.name}}</mat-option>
+                </mat-select>
             </div>
             <div class="form-group" style="width: 200px;margin-left: 10px;     margin-top: 28px;">
-                <input type="text" class="form-control" placeholder="Search Here">
+                <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="userQuestion" name="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)">
             </div>
         </div>
 
@@ -20,11 +25,7 @@
         margin-left: 15px;"><i class="fa-solid fa-plus"></i> Add</button>
     </div>
 </div>
-<div class="text-right" *ngIf="deleteIds.length > 0">
-    <button type="button" class="btn btn-danger mb-2" (click)="delete('delete', 'Delete', deleteIds, 'multiple')"><i
-            class="fa-solid fa-trash"></i>
-        Delete</button>
-</div>
+
 <div class="card table-responsive">
     <table class="table table-bordered mb-0">
         <thead>
@@ -41,7 +42,8 @@
         <tbody>
             <tr *ngFor="let list of catList; let i = index">
                 <td>
-                    <mat-checkbox class="no-checkbox" (change)="noCheck($event, list.id)"></mat-checkbox>{{TableIndex+i + 1}}
+                    <mat-checkbox class="no-checkbox" (change)="noCheck($event, list.id)"></mat-checkbox>{{TableIndex+i
+                    + 1}}
                 </td>
                 <td>{{list?.categoryName}}</td>
                 <td>{{list?.name}}</td>
@@ -59,7 +61,8 @@
                             (click)="add('editSubCategory', 'Edit Sub Category', list)">
                             <i class="fa-solid fa-pencil"></i>
                         </span>
-                        <span class="btn-action" matTooltip="Delete" (click)="delete('delete', 'Delete', list.id, 'single')">
+                        <span class="btn-action" matTooltip="Delete"
+                            (click)="delete('delete', 'Delete', list.id, 'single')">
                             <i class="fa-solid fa-trash-can"></i>
                         </span>
                     </div>

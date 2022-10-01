@@ -1,25 +1,28 @@
 <div class="page-title d-flex align-items-center justify-content-between mb-4">
     <h4 class="mb-0">Wallpaper</h4>
     <div class="d-flex">
+        <div class="deleteall-btnout mr-3" *ngIf="deleteIds.length > 0">
+            <button type="button" class="btn btn-danger mb-2"
+                (click)="delete('delete', 'Delete', deleteIds, 'multiple')"><i class="fa-solid fa-trash"></i>
+                Delete</button>
+        </div>
         <div class="form-row">
             <div class="form-group" style="width: 200px;">
                 <label class="form-label">Select Category</label>
-                <select class="form-control">
-                    <option value="1">Select</option>
-                    <option value="3">Category 1</option>
-                    <option value="2">Category 2</option>
-                </select>
+                <mat-select class="form-control" placeholder="All" [(ngModel)]="modal.category_id" name="category_id" (selectionChange)="list()">
+                    <mat-option [value]="0">All</mat-option>
+                    <mat-option *ngFor="let list of category" [value]="list?.id">{{list?.name}}</mat-option>
+                </mat-select>
             </div>
             <div class="form-group" style="width: 200px;margin-left: 10px;">
                 <label class="form-label">Select Sub Category</label>
-                <select class="form-control">
-                    <option value="1">Select</option>
-                    <option value="3">Category 1</option>
-                    <option value="2">Category 2</option>
-                </select>
+                <mat-select class="form-control" placeholder="All" [(ngModel)]="modal.subcategory_id" name="subcategory_id" (selectionChange)="list()">
+                    <mat-option [value]="0">All</mat-option>
+                    <mat-option *ngFor="let list of subCategory" [value]="list?.id">{{list?.name}}</mat-option>
+                </mat-select>
             </div>
             <div class="form-group" style="width: 200px;margin-left: 10px;     margin-top: 28px;">
-                <input type="text" class="form-control" placeholder="Search Here">
+                <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="userQuestion" name="userQuestion" (ngModelChange)="this.userQuestionUpdate.next($event)">
             </div>
         </div>
 
@@ -51,11 +54,7 @@
         </div>
     </div>
 </div> -->
-<div class="text-right" *ngIf="deleteIds.length > 0">
-    <button type="button" class="btn btn-danger mb-2" (click)="delete('delete', 'Delete', deleteIds, 'multiple')"><i
-            class="fa-solid fa-trash"></i>
-        Delete</button>
-</div>
+
 
 <div class="wallpaper-outer">
     <div class="row">

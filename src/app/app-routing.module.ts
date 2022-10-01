@@ -16,6 +16,9 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent,canActivate: [AuthGuard] 
   },
+  {
+    path: 'dashboard', component: HomeComponent,canActivate: [AuthGuard] 
+  },
   { path: 'login', loadChildren: () => import("./pages/login/login.module").then(m => m.LoginModule) },
   { path: 'category', component: CategoryComponent,canActivate: [AuthGuard] },
   { path: 'sub-category', component: SubCategoryComponent,canActivate: [AuthGuard] },

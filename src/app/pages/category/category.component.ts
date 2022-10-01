@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { ModalComponent } from 'src/app/@common/modal/modal.component';
 import { CommonService } from 'src/app/common.service';
 
@@ -20,12 +21,25 @@ export class CategoryComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 15, 20];
   length: number = 20;
   pageEvent: any = PageEvent;
+  searchName: any;
+
+  public userQuestion!: string;
+  userQuestionUpdate = new Subject<string>();
 
   constructor(
     public dialog: MatDialog,
     private service: CommonService,
     private spinner: NgxSpinnerService,
-  ) { }
+  ) {
+    // Debounce search.
+    this.userQuestionUpdate.pipe(
+      debounceTime(400),
+      distinctUntilChanged())
+      .subscribe(value => {
+        this.searchName = value;
+        this.list(1, 10);
+      });
+  }
 
   ngOnInit(): void {
     this.list(1, 10);
@@ -34,7 +48,7 @@ export class CategoryComponent implements OnInit {
   list(start: any, length: any) {
     this.spinner.show();
     let InputData = {
-      "searchText": null,
+      "searchText": this.searchName,
       "pageIndex": start,
       "pageSize": length,
     }
