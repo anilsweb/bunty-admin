@@ -2,6 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/common.service';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
+
 
 @Component({
   selector: 'app-modal',
@@ -17,11 +20,17 @@ export class ModalComponent implements OnInit {
   url: any;
   selectedfiles: any;
   modelSubCategory: any = {};
-  modelWallpaper: any = {};
+  modelWallpaper: any = {
+    tagsList: []
+  };
   cateogyList: any[] = [];
   subCateogyList: any[] = [];
   modelUser: any = {};
   roleList: any[] = [];
+
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  // fruits: any[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {},
@@ -60,6 +69,26 @@ export class ModalComponent implements OnInit {
     if (this.modalAction == 'editWallpaper') {
       this.modelWallpaper = this.modalData.obj;
       this.url = this.modelWallpaper.imageURL;
+    }
+  }
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.modelWallpaper?.tagsList.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  remove(fruit: any): void {
+    const index = this.modelWallpaper?.tagsList.indexOf(fruit);
+
+    if (index >= 0) {
+      this.modelWallpaper?.tagsList.splice(index, 1);
     }
   }
 
@@ -128,6 +157,8 @@ export class ModalComponent implements OnInit {
   }
 
   onSubmitWallpaper(type: any) {
+    console.log(this.modelWallpaper);
+    
     if (this.modelWallpaper.imageURL) {
       console.log(this.modelWallpaper);
       this.spinner.show();
@@ -164,7 +195,7 @@ export class ModalComponent implements OnInit {
       reader.readAsDataURL(files);
     }
     const payload = new FormData();
-    payload.append('type', name);
+    payload.append('type', 'Web');
     payload.append('fileName', files.name);
     payload.append('fileData', this.selectedfiles);
     this.spinner.show();

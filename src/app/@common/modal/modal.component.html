@@ -80,7 +80,8 @@
             <div class="form-group col">
                 <label class="form-label">Select Category</label>
                 <mat-select class="form-control" [(ngModel)]="modelWallpaper.category_id" name="category_id"
-                    #category_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && category_id.invalid }" required (selectionChange)="getCategory($event.value)">
+                    #category_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && category_id.invalid }" required
+                    (selectionChange)="getCategory($event.value)">
                     <mat-option *ngFor="let list of cateogyList" [value]="list?.id">{{list?.name}}</mat-option>
                 </mat-select>
             </div>
@@ -112,12 +113,28 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label class="form-label">Description</label>
-                <textarea class="form-control" rows="3"  [(ngModel)]="modelWallpaper.description" name="description"
-                #description="ngModel" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }"
-                required></textarea>
+                <label class="form-label">Tags</label>
+                <input type="text" class="form-control w-100" [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)">
             </div>
         </div>
+        <mat-chip-list #chipList aria-label="Fruit selection" style="margin-top: -14px;" class="d-block">
+            <mat-chip *ngFor="let fruit of modelWallpaper?.tagsList" (removed)="remove(fruit)">
+                {{fruit}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+        </mat-chip-list>
+        <!-- <div class="form-row">
+            <div class="form-group col">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" rows="3" [(ngModel)]="modelWallpaper.description" name="description"
+                    #description="ngModel" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }"
+                    required></textarea>
+            </div>
+        </div> -->
     </mat-dialog-content>
     <mat-dialog-actions align="start" class="pt-0 pb-3">
         <button type="submit" class="btn btn-primary">{{modalAction == 'addWallpaper' ? 'Save' : 'Update'}}</button>
