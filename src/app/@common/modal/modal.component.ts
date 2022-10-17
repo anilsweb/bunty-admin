@@ -21,11 +21,13 @@ export class ModalComponent implements OnInit {
   selectedfiles: any;
   modelSubCategory: any = {};
   modelWallpaper: any = {
-    tagsList: []
+    tagsList: [],
+    imagesList: []
   };
   cateogyList: any[] = [];
   subCateogyList: any[] = [];
   modelUser: any = {};
+  modelRole: any = {};
   roleList: any[] = [];
 
   addOnBlur = true;
@@ -158,8 +160,8 @@ export class ModalComponent implements OnInit {
 
   onSubmitWallpaper(type: any) {
     console.log(this.modelWallpaper);
-    
-    if (this.modelWallpaper.imageURL) {
+
+    if (type == 'add' ? this.modelWallpaper?.imagesList?.length > 0 : this.modelWallpaper.imageURL) {
       console.log(this.modelWallpaper);
       this.spinner.show();
       console.log(type);
@@ -169,7 +171,7 @@ export class ModalComponent implements OnInit {
       } else {
         apiName = 'Master/WallpaperSave';
       }
-      this.service.PostService([this.modelWallpaper], apiName).subscribe(res => {
+      this.service.PostService(this.modelWallpaper, apiName).subscribe(res => {
         this.spinner.hide();
         console.log(res);
         if (res.body.status) {
@@ -182,7 +184,7 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  onSelectFile(event: any, name: any, modal: any) {
+  onSelectFile(event: any, name: any, modal: any, text: any) {
     const files = event.target.files[0];
     console.log(files);
 
@@ -202,8 +204,16 @@ export class ModalComponent implements OnInit {
     this.service.PostService(payload, 'Master/UploadImage').subscribe(res => {
       this.spinner.hide();
       console.log(res);
-      modal.imageURL = res.body.result;
-      modal.imageName = files.name;
+      if (text == 'single') {
+        modal.imageURL = res.body.result;
+        modal.imageName = files.name;
+      }
+      else {
+        modal.imagesList.push({
+          imageURL: res.body.result,
+          imageName: files.name
+        })
+      }
     })
   }
 
@@ -223,12 +233,31 @@ export class ModalComponent implements OnInit {
     })
   }
 
+  onSubmitRole() {
+    this.spinner.show();
+    let apiName = 'UserRoles/RoleSave';
+    this.service.PostService(this.modelUser, apiName).subscribe(res => {
+      this.spinner.hide();
+      console.log(res);
+      if (res?.body?.status) {
+        this.dialogRef.close(this.modelUser);
+        this.service.snackbarOpen(res?.body?.result?.message, 'x', 'success-snackbar');
+      } else {
+        this.service.snackbarOpen(res?.body?.result?.message, 'x', 'danger-snackbar');
+      }
+    })
+  }
+
   getCategory(e: any) {
     this.spinner.show();
     this.service.getservice({}, `Master/SubcategoryDropdownList?categoryid=${e}`).subscribe(res => {
       this.spinner.hide();
       this.subCateogyList = res.body.result;
     });
+  }
+
+  multiRemove(list: any, i: any) {
+    list.splice(i, 1);
   }
 
 }

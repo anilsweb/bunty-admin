@@ -8,6 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginHistoryComponent } from './pages/login-history/login-history.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { RolesComponent } from './pages/roles/roles.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { SubCategoryComponent } from './pages/sub-category/sub-category.component';
 import { UsersComponent } from './pages/users/users.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'change-password', component: ChangePasswordComponent,canActivate: [AuthGuard] },
   { path: 'wallpaper', component: WallpaperComponent,canActivate: [AuthGuard] },
   { path: 'users', component: UsersComponent,canActivate: [AuthGuard] },
+  { path: 'roles', component: RolesComponent,canActivate: [AuthGuard] },
   { path: 'reports', component: ReportsComponent,canActivate: [AuthGuard] },
   { path: 'settings', loadChildren: () => import("./pages/settings/settings.module").then(m => m.SettingsModule), canActivate: [AuthGuard] },
   { path: 'api-url', component: ApiUrlComponent,canActivate: [AuthGuard] },

@@ -41,21 +41,13 @@ export class CommonService {
       }).pipe(
         catchError(err => {
           this.spinner.hide();
-          if (err['error']?.error === "UNAUTHORIZED.") {
-            this.snackBar.open('Session Out', 'x', {
-              panelClass: ['danger-snackbar'],
-              duration: 3000
-            });
+          console.log(err?.status);
+          if (err?.status === 401) {
             localStorage.clear();
-            this.router.navigate(['login']).then(() => {
+            this.router.navigate(['loginData']).then(() => {
               window.location.reload();
             });
           }
-
-          this.snackBar.open('Their some exception error', 'x', {
-            panelClass: ['danger-snackbar'],
-            duration: 3000
-          });
           return throwError(err);
         })
       )
@@ -122,10 +114,13 @@ export class CommonService {
       }).pipe(
         catchError(err => {
           this.spinner.hide();
-          this.snackBar.open('Their some exception error', 'x', {
-            panelClass: ['danger-snackbar'],
-            duration: 3000
-          });
+          console.log(err?.status);
+          if (err?.status === 401) {
+            localStorage.clear();
+            this.router.navigate(['loginData']).then(() => {
+              window.location.reload();
+            });
+          }
           return throwError(err);
         })
       )

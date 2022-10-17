@@ -18,7 +18,7 @@
                         400x400)</small></label>
                 <label class="custom-file" [ngClass]="{ 'is-invalid': f.submitted && !url }">
                     <input type="file" class="custom-file-input"
-                        (change)="onSelectFile($event, 'Category', modelCategory)">
+                        (change)="onSelectFile($event, 'Category', modelCategory, 'single')">
                     <span class="custom-file-label" style="padding-left: 15px;"></span>
                 </label>
                 <div *ngIf="url" class="mt-1">
@@ -58,7 +58,7 @@
                         400x400)</small></label>
                 <label class="custom-file" [ngClass]="{ 'is-invalid': f.submitted && !url }">
                     <input type="file" class="custom-file-input"
-                        (change)="onSelectFile($event, 'SubCategory', modelSubCategory)">
+                        (change)="onSelectFile($event, 'SubCategory', modelSubCategory, 'single')">
                     <span class="custom-file-label" style="padding-left: 15px;"></span>
                 </label>
                 <div *ngIf="url" class="mt-1">
@@ -97,17 +97,33 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col" *ngIf="modalAction == 'editWallpaper'">
                 <label class="form-label">Select Image <small class="text-muted">(Recommended resolution: 200x200,
                         400x400)</small></label>
                 <label class="custom-file" [ngClass]="{ 'is-invalid': f.submitted && !url }">
                     <input type="file" class="custom-file-input"
-                        (change)="onSelectFile($event, 'Wallpaper', modelWallpaper)">
+                        (change)="onSelectFile($event, 'Wallpaper', modelWallpaper, 'single')">
                     <span class="custom-file-label" style="padding-left: 15px;"></span>
                 </label>
                 <div *ngIf="url" class="mt-1">
                     <img [src]="url" onError="this.src='assets/images/dummy.png'" alt=""
                         style="object-fit: cover; height: 40px;  width: 100px;">
+                </div>
+            </div>
+            <div class="form-group col" *ngIf="modalAction == 'addWallpaper'">
+                <label class="form-label">Select Image <small class="text-muted">(Recommended resolution: 200x200,
+                        400x400)</small></label>
+                <label class="custom-file" [ngClass]="{ 'is-invalid': f.submitted && !url }">
+                    <input type="file" class="custom-file-input"
+                        (change)="onSelectFile($event, 'Wallpaper', modelWallpaper, 'multi')">
+                    <span class="custom-file-label" style="padding-left: 15px;"></span>
+                </label>
+                <div *ngIf="modelWallpaper?.imagesList?.length > 0" class="mt-1">
+                    <p *ngFor="let list of modelWallpaper?.imagesList; let i = index"
+                        class="d-flex justify-content-between align-items-center">
+                        {{list?.imageName}}
+                        <a style="cursor: pointer;" (click)="multiRemove(modelWallpaper?.imagesList, i)">x</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -192,6 +208,22 @@
     </mat-dialog-content>
     <mat-dialog-actions align="start" class="pt-0 pb-3">
         <button type="submit" class="btn btn-primary">{{modalAction == 'addUser' ? 'Save' : 'Update'}}</button>
+    </mat-dialog-actions>
+</form>
+
+<form *ngIf="modalAction == 'addRole' || modalAction == 'editRole'" (ngSubmit)="f.form.valid && onSubmitRole()"
+    #f="ngForm">
+    <mat-dialog-content class="mat-typography">
+        <div class="form-row">
+            <div class="form-group col">
+                <label class="form-label">Role Name</label>
+                <input type="text" class="form-control" [(ngModel)]="modelUser.name" name="name" #name="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="start" class="pt-0 pb-3">
+        <button type="submit" class="btn btn-primary">{{modalAction == 'addRole' ? 'Save' : 'Update'}}</button>
     </mat-dialog-actions>
 </form>
 

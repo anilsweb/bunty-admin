@@ -29,6 +29,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { RolesComponent } from './pages/roles/roles.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     ApiUrlComponent,
     ChangePasswordComponent,
     ModalComponent,
-    LoginHistoryComponent
+    LoginHistoryComponent,
+    RolesComponent
   ],
   imports: [
     BrowserModule,
