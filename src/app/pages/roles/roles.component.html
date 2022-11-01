@@ -16,6 +16,9 @@
         <button type="button" class="btn btn-primary" (click)="add('addRole', 'Add Role', {})" style="height: 37px;
                 margin-top: 28px;
                 margin-left: 15px;"><i class="fa-solid fa-plus"></i> Add</button>
+        <button type="button" class="btn btn-warning" style="height: 37px;
+                margin-top: 28px;
+                margin-left: 15px;" routerLink="/permission"><i class="fa-solid fa-plus"></i> Permissions</button>
     </div>
 </div>
 
@@ -25,7 +28,6 @@
             <tr>
                 <th>#</th>
                 <th>Category Name</th>
-                <th>Image</th>
                 <th>Active / Deactive</th>
                 <th>Updated On</th>
                 <th>Action</th>
@@ -39,16 +41,13 @@
                 </td>
                 <td>{{list?.name}}</td>
                 <td>
-                    <img [src]="list?.imageURL" onerror="this.src='/assets/images/dummy.png'" class="tdimg" alt="">
-                </td>
-                <td>
                     <mat-slide-toggle [(ngModel)]="list.isActive" name="isActive_{{i}}"
                         (change)="toggle($event, list?.id)"></mat-slide-toggle>
                 </td>
                 <td>{{list?.lastUpdate | date}}</td>
                 <td>
                     <div class="d-flex">
-                        <span class="btn-action" matTooltip="Edit" (click)="add('editCategory', 'Edit Category', list)">
+                        <span class="btn-action" matTooltip="Edit" (click)="add('editRole', 'Edit Role', list)">
                             <i class="fa-solid fa-pencil"></i>
                         </span>
                         <span class="btn-action" matTooltip="Delete"

@@ -72,6 +72,9 @@ export class ModalComponent implements OnInit {
       this.modelWallpaper = this.modalData.obj;
       this.url = this.modelWallpaper.imageURL;
     }
+    if (this.modalAction == 'editRole') {
+      this.modelUser = this.modalData.obj;
+    }
   }
 
   add(event: MatChipInputEvent): void {
@@ -169,7 +172,7 @@ export class ModalComponent implements OnInit {
       if (type == 'add') {
         apiName = 'Master/WallpaperSave';
       } else {
-        apiName = 'Master/WallpaperSave';
+        apiName = 'Master/WallpaperUpdate';
       }
       this.service.PostService(this.modelWallpaper, apiName).subscribe(res => {
         this.spinner.hide();
@@ -185,6 +188,7 @@ export class ModalComponent implements OnInit {
   }
 
   onSelectFile(event: any, name: any, modal: any, text: any) {
+    
     const files = event.target.files[0];
     console.log(files);
 
@@ -197,7 +201,7 @@ export class ModalComponent implements OnInit {
       reader.readAsDataURL(files);
     }
     const payload = new FormData();
-    payload.append('type', 'Web');
+    payload.append('type', name);
     payload.append('fileName', files.name);
     payload.append('fileData', this.selectedfiles);
     this.spinner.show();

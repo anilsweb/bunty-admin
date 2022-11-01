@@ -47,7 +47,7 @@ export class SubCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.list(1,10);
+    this.list(1, 10);
     this.cateList();
   }
 
@@ -83,6 +83,8 @@ export class SubCategoryComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.list(1, 10);
+        this.TableIndex = 0;
+        this.modal.pageIndex = 0;
       }
     });
   }
@@ -126,7 +128,7 @@ export class SubCategoryComponent implements OnInit {
         this.service.PostService(delData, 'Master/SubcategoryDeleteByRange').subscribe(res => {
           this.spinner.hide();
           if (res.body.result.isSuccess) {
-            this.list(1,10);
+            this.list(1, 10);
             this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
           } else {
             this.service.snackbarOpen(res.body.result.message, 'x', 'danger-snackbar');

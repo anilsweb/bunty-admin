@@ -30,6 +30,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RolesComponent } from './pages/roles/roles.component';
+import { PermissionComponent } from './pages/permission/permission.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { RolesComponent } from './pages/roles/roles.component';
     ChangePasswordComponent,
     ModalComponent,
     LoginHistoryComponent,
-    RolesComponent
+    RolesComponent,
+    PermissionComponent
   ],
   imports: [
     BrowserModule,

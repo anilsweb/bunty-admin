@@ -48,7 +48,7 @@ export class GeneralSettingComponent implements OnInit {
       reader.readAsDataURL(files);
     }
     const payload = new FormData();
-    payload.append('type', name);
+    payload.append('type', 'Web');
     payload.append('fileName', files.name);
     payload.append('fileData', this.selectedfiles);
     this.spinner.show();

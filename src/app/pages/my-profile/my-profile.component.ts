@@ -46,7 +46,7 @@ export class MyProfileComponent implements OnInit {
       reader.readAsDataURL(files);
     }
     const payload = new FormData();
-    payload.append('type', 'profile');
+    payload.append('type', 'Profile');
     payload.append('fileName', files.name);
     payload.append('fileData', this.selectedfiles);
     this.spinner.show();

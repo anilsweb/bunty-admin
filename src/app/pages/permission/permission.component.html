@@ -1,0 +1,24 @@
+<div class="page-title">
+    <h4 class="mb-4">Permission</h4>
+    <div class="card table-responsive">
+        <table class="table table-bordered mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let list of catList">
+                    <td>{{list?.permissionName}}</td>
+                    <td>
+                        <mat-checkbox class="mr-3">Add</mat-checkbox>
+                        <mat-checkbox class="mr-3">Edit</mat-checkbox>
+                        <mat-checkbox class="mr-3">Delete</mat-checkbox>
+                        <mat-checkbox class="mr-3">View</mat-checkbox>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

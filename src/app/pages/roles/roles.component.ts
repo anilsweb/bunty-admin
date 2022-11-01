@@ -81,7 +81,7 @@ export class RolesComponent implements OnInit {
   toggle(e: any, id: any) {
     if (e) {
       this.spinner.show();
-      this.service.PostService({ id: id }, 'Master/CategoryActiveDeactive').subscribe(res => {
+      this.service.PostService({ id: id }, 'UserRoles/RoleActiveDeactive').subscribe(res => {
         this.spinner.hide();
         if (res.body.result.isSuccess) {
           this.service.snackbarOpen(res.body.result.message, 'x', 'success-snackbar');
@@ -115,7 +115,7 @@ export class RolesComponent implements OnInit {
         } else {
           delData = id;
         }
-        this.service.PostService(delData, 'Master/CategoryDeleteByRange').subscribe(res => {
+        this.service.PostService(delData, 'UserRoles/RoleDeleteByRange').subscribe(res => {
           this.spinner.hide();
           if (res.body.result.isSuccess) {
             this.list(1, 10);
