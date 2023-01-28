@@ -1,39 +1,39 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth.guard';
-import { ApiUrlComponent } from './pages/api-url/api-url.component';
-import { CategoryComponent } from './pages/category/category.component';
-import { ChangePasswordComponent } from './pages/change-password/change-password.component';
-import { HomeComponent } from './pages/home/home.component';
-import { LoginHistoryComponent } from './pages/login-history/login-history.component';
-import { MyProfileComponent } from './pages/my-profile/my-profile.component';
-import { PermissionComponent } from './pages/permission/permission.component';
-import { ReportsComponent } from './pages/reports/reports.component';
-import { RolesComponent } from './pages/roles/roles.component';
-import { SettingsComponent } from './pages/settings/settings.component';
-import { SubCategoryComponent } from './pages/sub-category/sub-category.component';
-import { UsersComponent } from './pages/users/users.component';
-import { WallpaperComponent } from './pages/wallpaper/wallpaper.component';
+import { AllTransactionComponent } from './all-transaction/all-transaction.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
+import { ChatComponent } from './chat/chat.component';
+import { CryptoComponent } from './crypto/crypto.component';
+import { HomeComponent } from './home/home.component';
+import { KycComponent } from './kyc/kyc.component';
+import { P2pComponent } from './p2p/p2p.component';
+import { PaymentCongestedComponent } from './payment-congested/payment-congested.component';
+import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { PaymentTimerComponent } from './payment-timer/payment-timer.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PhoneVerifyComponent } from './phone-verify/phone-verify.component';
+import { SettingComponent } from './setting/setting.component';
+import { UpiComponent } from './upi/upi.component';
+import { WithdrawalRequestComponent } from './withdrawal-request/withdrawal-request.component';
+
 const routes: Routes = [
-  {
-    path: '', component: HomeComponent,canActivate: [AuthGuard] 
-  },
-  {
-    path: 'dashboard', component: HomeComponent,canActivate: [AuthGuard] 
-  },
-  { path: 'login', loadChildren: () => import("./pages/login/login.module").then(m => m.LoginModule) },
-  { path: 'category', component: CategoryComponent,canActivate: [AuthGuard] },
-  { path: 'sub-category', component: SubCategoryComponent,canActivate: [AuthGuard] },
-  { path: 'my-profile', component: MyProfileComponent,canActivate: [AuthGuard] },
-  { path: 'change-password', component: ChangePasswordComponent,canActivate: [AuthGuard] },
-  { path: 'wallpaper', component: WallpaperComponent,canActivate: [AuthGuard] },
-  { path: 'users', component: UsersComponent,canActivate: [AuthGuard] },
-  { path: 'roles', component: RolesComponent,canActivate: [AuthGuard] },
-  { path: 'permission', component: PermissionComponent,canActivate: [AuthGuard] },
-  { path: 'reports', component: ReportsComponent,canActivate: [AuthGuard] },
-  { path: 'settings', loadChildren: () => import("./pages/settings/settings.module").then(m => m.SettingsModule), canActivate: [AuthGuard] },
-  { path: 'api-url', component: ApiUrlComponent,canActivate: [AuthGuard] },
-  { path: 'log-history', component: LoginHistoryComponent,canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent },
+  { path: 'upi', component: UpiComponent },
+  { path: 'crypto', component: CryptoComponent },
+  { path: 'payment-timer', component: PaymentTimerComponent },
+  { path: 'payment-success', component: PaymentSuccessComponent },
+  { path: 'payment-congested', component: PaymentCongestedComponent },
+  { path: 'all-transaction', component: AllTransactionComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'chat-list', component: ChatListComponent },
+  { path: 'kyc', component: KycComponent },
+  { path: 'p2p', component: P2pComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'payment-failed', component: PaymentFailedComponent },
+  { path: 'phone-verify', component: PhoneVerifyComponent },
+  { path: 'setting', component: SettingComponent },
+  { path: 'withdrawal-request', component: WithdrawalRequestComponent },
 ];
 
 @NgModule({

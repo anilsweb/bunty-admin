@@ -3,79 +3,53 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidenavComponent } from './@common/sidenav/sidenav.component';
-import { HeaderComponent } from './@common/header/header.component';
-import { CategoryComponent } from './pages/category/category.component';
-import { SubCategoryComponent } from './pages/sub-category/sub-category.component';
-import { WallpaperComponent } from './pages/wallpaper/wallpaper.component';
-import { MyProfileComponent } from './pages/my-profile/my-profile.component';
-import { HomeComponent } from './pages/home/home.component';
-import { UsersComponent } from './pages/users/users.component';
-import { ReportsComponent } from './pages/reports/reports.component';
-import { ApiUrlComponent } from './pages/api-url/api-url.component';
-import { AuthGuard } from './auth.guard';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginModule } from './pages/login/login.module';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatButtonModule } from '@angular/material/button';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './@common/material.module';
-import { ChangePasswordComponent } from './pages/change-password/change-password.component';
-import { ModalComponent } from './@common/modal/modal.component';
-import { LoginHistoryComponent } from './pages/login-history/login-history.component';
-import { CKEditorModule } from 'ckeditor4-angular';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { RolesComponent } from './pages/roles/roles.component';
-import { PermissionComponent } from './pages/permission/permission.component';
-
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
+import { UpiComponent } from './upi/upi.component';
+import { CryptoComponent } from './crypto/crypto.component';
+import { PaymentTimerComponent } from './payment-timer/payment-timer.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { PaymentCongestedComponent } from './payment-congested/payment-congested.component';
+import { AllTransactionComponent } from './all-transaction/all-transaction.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
+import { KycComponent } from './kyc/kyc.component';
+import { P2pComponent } from './p2p/p2p.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
+import { PhoneVerifyComponent } from './phone-verify/phone-verify.component';
+import { SettingComponent } from './setting/setting.component';
+import { WithdrawalRequestComponent } from './withdrawal-request/withdrawal-request.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent,
     HeaderComponent,
-    CategoryComponent,
-    SubCategoryComponent,
-    WallpaperComponent,
-    MyProfileComponent,
     HomeComponent,
-    UsersComponent,
-    ReportsComponent,
-    ApiUrlComponent,
-    ChangePasswordComponent,
-    ModalComponent,
-    LoginHistoryComponent,
-    RolesComponent,
-    PermissionComponent
+    UpiComponent,
+    CryptoComponent,
+    PaymentTimerComponent,
+    PaymentSuccessComponent,
+    PaymentCongestedComponent,
+    AllTransactionComponent,
+    ChatComponent,
+    ChatListComponent,
+    KycComponent,
+    P2pComponent,
+    PaymentComponent,
+    PaymentFailedComponent,
+    PhoneVerifyComponent,
+    SettingComponent,
+    WithdrawalRequestComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LoginModule,
-    MatSnackBarModule,
-    MatButtonModule,
-    NgxSpinnerModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CKEditorModule,
-    MatDatepickerModule, MatMomentDateModule
+    SocketIoModule.forRoot(config)
   ],
-  exports: [
-    FormsModule,
-    ReactiveFormsModule,
-    CKEditorModule
-  ],
-  providers: [AuthGuard,
-    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
-  ],
-  bootstrap: [AppComponent],
-
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
