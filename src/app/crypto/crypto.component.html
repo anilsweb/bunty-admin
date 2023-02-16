@@ -5,16 +5,26 @@
     <div class="QR-id crypto-wallet">
         <div class="form-group">
             <label for="">BTC</label>
-            <div type="text" class="form-control-box"></div>
-            <a routerLink="javascript:void(0);" class="qr-copy-btn"><img src="assets/images/copy.png" alt="copy"></a>
+            <div type="text" class="form-control-box">255dsfg5sd6g......</div>
+            <a href="javascript:void(0);" class="qr-copy-btn"><img src="assets/images/copy.png" alt="copy"></a>
         </div>
         <div class="form-group">
-            <label for="">USDT</label>
-            <input type="text" class="form-control" placeholder="" value="" disabled>
-            <a routerLink="javascript:void(0);" class="qr-copy-btn"><img src="assets/images/copy.png" alt="copy"></a>
+            <input type="text" class="form-control" placeholder="Transaction ID" required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Amount" required>
+        </div>
+        <div class="form-group">
+            <label for="">Payment Image</label>
+            <input type="file" class="form-control">
+        </div>
+        <div class="document-demo-image">
+            <div class="doc-img">
+                <img src="assets/images/screenshot.png">
+            </div>
         </div>
         <div class="text-center">
-            <a routerLink="payment-timer.html" class="btn1">Submit</a>
+            <a routerLink="payment-timer" class="btn1">Submit</a>
         </div>
     </div>
 

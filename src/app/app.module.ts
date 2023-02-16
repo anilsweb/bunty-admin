@@ -21,7 +21,13 @@ import { PhoneVerifyComponent } from './phone-verify/phone-verify.component';
 import { SettingComponent } from './setting/setting.component';
 import { WithdrawalRequestComponent } from './withdrawal-request/withdrawal-request.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { CryptoWalletComponent } from './crypto-wallet/crypto-wallet.component';
+import { P2pNotificationComponent } from './p2p-notification/p2p-notification.component';
+import { P2pNotificationInformationComponent } from './p2p-notification-information/p2p-notification-information.component';
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
+import { NgxSpinnerModule } from "ngx-spinner";
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -42,12 +48,18 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     PaymentFailedComponent,
     PhoneVerifyComponent,
     SettingComponent,
-    WithdrawalRequestComponent
+    WithdrawalRequestComponent,
+    CryptoWalletComponent,
+    P2pNotificationComponent,
+    P2pNotificationInformationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,9 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllTransactionComponent } from './all-transaction/all-transaction.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { ChatComponent } from './chat/chat.component';
+import { CryptoWalletComponent } from './crypto-wallet/crypto-wallet.component';
 import { CryptoComponent } from './crypto/crypto.component';
 import { HomeComponent } from './home/home.component';
 import { KycComponent } from './kyc/kyc.component';
+import { P2pNotificationInformationComponent } from './p2p-notification-information/p2p-notification-information.component';
+import { P2pNotificationComponent } from './p2p-notification/p2p-notification.component';
 import { P2pComponent } from './p2p/p2p.component';
 import { PaymentCongestedComponent } from './payment-congested/payment-congested.component';
 import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
@@ -34,6 +37,9 @@ const routes: Routes = [
   { path: 'phone-verify', component: PhoneVerifyComponent },
   { path: 'setting', component: SettingComponent },
   { path: 'withdrawal-request', component: WithdrawalRequestComponent },
+  { path: 'crypto-wallet', component: CryptoWalletComponent  },
+  { path: 'p2p-notification', component: P2pNotificationComponent  },
+  { path: 'p2p-notification-information', component: P2pNotificationInformationComponent  },
 ];
 
 @NgModule({

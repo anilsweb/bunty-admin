@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/@services/api.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-home',
@@ -7,10 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService,
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit(): void {
     // this.abc()
+    this.getParentData();
+  }
+
+  getParentData() {
+    const payload = {
+      "access_key": "hdwokidjqswdepoqkkwkjdeqwpdojwPW",
+      "auth_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJmYXN0dGFnZyIsImlhdCI6MTUxNjIzOTAyMn0.QWy8X9bmGvGbcdeN1TYth2vCRkk2Ik55qQ4sgueGIq4",
+      "origin": "testsiterr.com",
+      "userid": 456,
+      "username": "fasttagg"
+    }
+    this.apiService.post(payload, 'verifyMerchant').subscribe(res => {
+      if (!res?.error) {
+        localStorage.setItem('userData', JSON.stringify(res?.data));
+      }
+    })
   }
 
   abc() {

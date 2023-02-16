@@ -19,11 +19,44 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
   <script>
     // Send random message data on every button click
-    window.addEventListener('paymentResult', function (e) {
-      // alert('ee')
-      // var random = Math.random();
-      // sendMessage('' + random);
-    })
+    // window.addEventListener('paymentResult', function (e) {
+    //   // alert('ee')
+    //   // var random = Math.random();
+    //   // sendMessage('' + random);
+    // })
+
+
+
+    // addEventListener support for IE8
+    // var bindEvent = function (element, eventName, eventHandler) {
+    //   if (element.addEventListener) {
+    //     element.addEventListener(eventName, eventHandler, false);
+    //   } else if (element.attachEvent) {
+    //     element.attachEvent('on' + eventName, eventHandler);
+    //   }
+    // }
+
+    // Send a message to the parent
+    // var sendMessage = function (msg) {
+    //   // alert('aaaaaee')
+    //   // Make sure you are sending a string, and to stringify JSON
+    //   window.parent.postMessage(msg, '*');
+    // };
+
+    // var results = document.getElementById('results'),
+    //   messageButton = document.getElementById('message_button');
+
+    // // Listen to messages from parent window
+    // bindEvent(window, 'message', function (e) {
+    //   results.innerHTML = e.data;
+    // });
+
+
+    // bindEvent(messageButton, 'click', function (e) {
+    //   var random = Math.random();
+    //   sendMessage('' + random);
+    // });
+
     //Payment tabs
     (function () {
       $(function () {
@@ -69,35 +102,17 @@
 
     }).call(this);
 
-    // addEventListener support for IE8
-    // var bindEvent = function (element, eventName, eventHandler) {
-    //   if (element.addEventListener) {
-    //     element.addEventListener(eventName, eventHandler, false);
-    //   } else if (element.attachEvent) {
-    //     element.attachEvent('on' + eventName, eventHandler);
-    //   }
-    // }
+    //other pages
+    function myFunction() {
+      var x = document.getElementById("myDIV");
+      x.style.display = "flex";
+    }
 
-    // Send a message to the parent
-    var sendMessage = function (msg) {
-      // alert('aaaaaee')
-      // Make sure you are sending a string, and to stringify JSON
-      window.parent.postMessage(msg, '*');
-    };
+    function myFunctionclose() {
+      var x = document.getElementById("myDIV");
+      x.style.display = "none";
+    }
 
-    var results = document.getElementById('results'),
-      messageButton = document.getElementById('message_button');
-
-    // Listen to messages from parent window
-    bindEvent(window, 'message', function (e) {
-      results.innerHTML = e.data;
-    });
-
-    
-    // bindEvent(messageButton, 'click', function (e) {
-    //   var random = Math.random();
-    //   sendMessage('' + random);
-    // });
   </script>
 </body>
 
